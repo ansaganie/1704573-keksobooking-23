@@ -1,7 +1,7 @@
 /**
  * @description Return a random integer from min(included) to max(included)
- * @param {integer} min
- * @param {integer} max
+ * @param {integer} min - positive integer, can be 0 also
+ * @param {integer} max - positive integer
  * @returns {integer} random number
  */
 const getRandomInt = (min, max) => {
@@ -18,8 +18,8 @@ const getRandomInt = (min, max) => {
 
 /**
  * @description Returns a random number from min (included) to max (included)
- * @param {number} min
- * @param {number} max
+ * @param {number} min - positive number, can be 0 also
+ * @param {number} max - positive number
  * @param {integer} precision
  * @returns {number} random number
  */
