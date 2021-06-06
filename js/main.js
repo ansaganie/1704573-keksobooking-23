@@ -46,11 +46,13 @@ const AUTHORS = ['Aras Mayer', 'Ehsan Bain', 'Fearne Armstrong',
   'Tia Roth', 'Ayse Haynes', 'Yahya Mckee', 'Ananya Manning', 'Larry Wheatley',
   'Alaw Washington', 'Amelia Mackenzie', 'Yazmin Smart', 'Awais Hawes'];
 
-const OFFER_TITLE = ['Oakwood Premier Tokyo', 'Hotel ICHIGAYA（JR Ichigaya Sta.)',
+const OFFER_TITLE = [
+  'Oakwood Premier Tokyo', 'Hotel ICHIGAYA（JR Ichigaya Sta.)',
   'TOE LIBRARY Tokyo Asakusa', 'SCASA NishiShinjuku', 'COTO Tokyo Shibuya 4',
   'Studio Inn Nishi Shinjuku', 'COTO Tokyo Shibuya 2',
   'Stay SAKURA Tokyo Shinjuku Hyaku Kura', 'Hotel Axas Nihonbashi',
-  'Space F 代々木', 'Hermitage Nishi Shinjuku'];
+  'Space F 代々木', 'Hermitage Nishi Shinjuku'
+];
 
 const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
@@ -159,4 +161,3 @@ const RANDOM_ADVERT_COUNT = 10;
 const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(() => getRandomAdvert());
 
 randomAdverts;
-
