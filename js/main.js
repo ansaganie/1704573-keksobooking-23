@@ -103,7 +103,7 @@ const getRandomElement = (arr) => arr[getRandomInt(0, arr.length - 1)];
  */
 const getRandomSubArray = (arr, arrLength) => {
   const resultArr = [];
-  for (let i = 0; i < arrLength; i++) {
+  for (let int = 0; int < arrLength; int++) {
     const randElem = getRandomElement(arr);
 
     if (!resultArr.includes(randElem)) {
@@ -157,4 +157,6 @@ const getRandomAdvert = () => {
 const RANDOM_ADVERT_COUNT = 10;
 
 const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(() => getRandomAdvert());
+
+randomAdverts;
 
