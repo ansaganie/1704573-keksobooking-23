@@ -120,21 +120,11 @@ const getRandomSubArray = (arr, arrLength) => {
  * @param {object} location - location object with latitude and longitude values;
  * @returns {object} random offer
  */
-const getRandOffer = (location) => {
-  const offer = {};
-  offer.title = getRandomElement(OFFER_TITLE);
-  offer.address = `${location.lat}, ${location.lng}`;
-  offer.price = getRandomInt(1500, 5000);
-  offer.type = getRandomElement(OFFER_TYPES);
-  offer.rooms = getRandomInt(1, 10);
-  offer.guests = getRandomInt(1, 10);
-  offer.checkin = getRandomElement(OFFER_CHECK_TIMES);
-  offer.checkout = getRandomElement(OFFER_CHECK_TIMES);
-  offer.features = getRandomSubArray(OFFER_FEATURES, getRandomInt(1, OFFER_FEATURES.length - 1));
-  offer.description = getRandomElement(OFFER_DESCRIPTIONS);
-  offer.photos = getRandomSubArray(OFFER_PHOTOS, getRandomInt(2, 4));
-  return offer;
-};
+const getRandOffer = (location) => ({
+  title: getRandomElement(OFFER_TITLE);
+  .........
+  photos: getRandomSubArray(OFFER_PHOTOS, getRandomInt(2, 4));
+});
 
 /**
  * Generates a random advertisement from given list of data
