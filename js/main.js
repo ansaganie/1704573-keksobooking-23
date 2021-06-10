@@ -31,15 +31,11 @@ const getRandomDecimal = (min, max, precision) => {
   if (min < 0 || min > max) {
     return undefined;
   }
-
   const result = Math.random() * (min - max) + max;
-
   return parseFloat(result.toFixed(precision));
 };
 
-getRandomDecimal(0, 5, 2);
-getRandomInt(0.5, 2.5);
-
+const RANDOM_ADVERT_COUNT = 10;
 
 const AUTHORS = ['Aras Mayer', 'Ehsan Bain', 'Fearne Armstrong',
   'Yasmine Contreras', 'Amisha Figueroa', 'Harper-Rose Sparrow', 'Kyran Boyce',
@@ -63,18 +59,15 @@ const OFFER_DESCRIPTIONS = [
   `This accommodation is located near “Hikifune” station. You can reach there on foot
   from the station about 8min. Relatively close from Asakusa is Sensoji Temple and
   Kaminarimon, it is a quiet downtown.`,
-
   `Non smoking European-style rooms (with bath and toilet)
   My Resort House is located in the place of overlooking the Pacific Ocean.
   You can stay the room is the third floor.
   Please enjoy the South-Boso of resort life !!`,
-
   `In the traditional town of Asakusabashi, this room is beautifully decorated and kept,
   a spot of relaxation and warmth. Comfortable living quarters include bedding for 4 guests
   and plenty of space. Amenities are prepared from the basic bathroom variety to the kitchen,
    and laundry items. Excellent for long-term stays. Internet supported by WiFi. 3 minute walk
     away from the station, and just 3 minutes away to Asakusa.`,
-
   `Sasazuka Station is 5 minutes by train to Shinjuku Station,
   It is a very convenient location because you can use the metropolitan Shinjuku line besides the Keio line! !
   The recommended neighboring places are Yoyogi Park and Shimokitazawa Station.
@@ -101,62 +94,45 @@ const getRandomElement = (arr) => arr[getRandomInt(0, arr.length - 1)];
  * @param {integer} - length of result array
  * @returns {array} new subarray;
  */
-const getRandomSubArray = (arr, arrLength) => {
-  const resultArr = [];
-  for (let int = 0; int < arrLength; int++) {
-    const randElem = getRandomElement(arr);
-
-    if (!resultArr.includes(randElem)) {
-      resultArr.push(randElem);
-    }
-  }
-  return resultArr;
-};
+const getRandomSubArray = (arr, arrLength) =>
+  new Set(new Array(arrLength).fill(undefined).map(() => getRandomElement(arr)));
 
 /**
  * Generates a random offer from given list of data
  * @param {object} location - location object with latitude and longitude values;
  * @returns {object} random offer
  */
-const getRandOffer = (location) => {
-  const offer = {};
-  offer.title = getRandomElement(OFFER_TITLE);
-  offer.address = `${location.lat}, ${location.lng}`;
-  offer.price = getRandomInt(1500, 5000);
-  offer.type = getRandomElement(OFFER_TYPES);
-  offer.rooms = getRandomInt(1, 10);
-  offer.guests = getRandomInt(1, 10);
-  offer.checkin = getRandomElement(OFFER_CHECK_TIMES);
-  offer.checkout = getRandomElement(OFFER_CHECK_TIMES);
-  offer.features = getRandomSubArray(OFFER_FEATURES, getRandomInt(1, OFFER_FEATURES.length - 1));
-  offer.description = getRandomElement(OFFER_DESCRIPTIONS);
-  offer.photos = getRandomSubArray(OFFER_PHOTOS, getRandomInt(2, 4));
-  return offer;
-};
+const getRandOffer = (location) => ({
+  title : getRandomElement(OFFER_TITLE),
+  address : `${location.lat}, ${location.lng}`,
+  price : getRandomInt(1500, 5000),
+  type : getRandomElement(OFFER_TYPES),
+  rooms : getRandomInt(1, 10),
+  guests : getRandomInt(1, 10),
+  checkin : getRandomElement(OFFER_CHECK_TIMES),
+  checkout : getRandomElement(OFFER_CHECK_TIMES),
+  features : getRandomSubArray(OFFER_FEATURES, getRandomInt(1, OFFER_FEATURES.length - 1)),
+  description : getRandomElement(OFFER_DESCRIPTIONS),
+  photos : getRandomSubArray(OFFER_PHOTOS, getRandomInt(2, 4)),
+});
 
 /**
  * Generates a random advertisement from given list of data
  * @returns {object} random advert
  */
 const getRandomAdvert = () => {
-  const advert = {};
-
-  const randomAuthor = getRandomElement(AUTHORS);
-  advert.author = randomAuthor;
-
-  const randLocation = {};
-  randLocation.lat = getRandomDecimal(35.65, 35.7, 5);
-  randLocation.lng = getRandomDecimal(139.7, 139.8, 5);
-  advert.location = randLocation;
-
-  advert.offer = getRandOffer(randLocation);
-
+  const advert = {
+    author: getRandomElement(AUTHORS),
+    location : {
+      lat : getRandomDecimal(35.65, 35.7, 5),
+      lng : getRandomDecimal(139.7, 139.8, 5),
+    },
+  };
+  advert.offer = getRandOffer(advert.location);
   return advert;
 };
 
-const RANDOM_ADVERT_COUNT = 10;
 
 const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(() => getRandomAdvert());
 
 randomAdverts;
-
