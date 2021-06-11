@@ -36,6 +36,19 @@ const getRandomDecimal = (min, max, precision) => {
 };
 
 const RANDOM_ADVERT_COUNT = 10;
+const OFFER_PRICE_MIN = 1500;
+const OFFER_PRICE_MAX = 5000;
+const ROOM_COUNT_MIN = 1;
+const ROOM_COUNT_MAX = 10;
+const GUEST_COUNT_MIN = 1;
+const GUEST_COUNT_MAX = 10;
+const PHOTO_COUNT_MIN = 2;
+const PHOTO_COUNT_MAX = 4;
+const LATITUDE_MIN = 35.65;
+const LATITUDE_MAX = 35.7;
+const LONGITUDE_MIN = 139.7;
+const LONGITUDE_MAX = 139.8;
+const LAT_LNG_PRECISION = 5;
 
 const AUTHORS = ['Aras Mayer', 'Ehsan Bain', 'Fearne Armstrong',
   'Yasmine Contreras', 'Amisha Figueroa', 'Harper-Rose Sparrow', 'Kyran Boyce',
@@ -96,8 +109,10 @@ const getRandomElement = (arr) => arr[getRandomInt(0, arr.length - 1)];
  * @param {integer} - length of result array
  * @returns {array} new subarray;
  */
-const getRandomSubArray = (arr, arrLength) =>
-  new Set(new Array(arrLength).fill(undefined).map(() => getRandomElement(arr)));
+const getRandomSubArray = (arr, arrLength) => {
+  const subArr = new Array(arrLength).fill(undefined).map(() => getRandomElement(arr));
+  return new Set(subArr);
+};
 
 /**
  * Generates a random offer from given list of data
@@ -107,15 +122,15 @@ const getRandomSubArray = (arr, arrLength) =>
 const getRandOffer = (location) => ({
   title : getRandomElement(OFFER_TITLE),
   address : `${location.lat}, ${location.lng}`,
-  price : getRandomInt(1500, 5000),
+  price : getRandomInt(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
   type : getRandomElement(OFFER_TYPES),
-  rooms : getRandomInt(1, 10),
-  guests : getRandomInt(1, 10),
+  rooms : getRandomInt(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
+  guests : getRandomInt(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
   checkin : getRandomElement(OFFER_CHECK_TIMES),
   checkout : getRandomElement(OFFER_CHECK_TIMES),
   features : getRandomSubArray(OFFER_FEATURES, getRandomInt(1, OFFER_FEATURES.length - 1)),
   description : getRandomElement(OFFER_DESCRIPTIONS),
-  photos : getRandomSubArray(OFFER_PHOTOS, getRandomInt(2, 4)),
+  photos : getRandomSubArray(OFFER_PHOTOS, getRandomInt(PHOTO_COUNT_MIN, PHOTO_COUNT_MAX)),
 });
 
 /**
@@ -123,18 +138,18 @@ const getRandOffer = (location) => ({
  * @returns {object} random advert
  */
 const getRandomAdvert = () => {
-  const advert = {
-    author: getRandomElement(AUTHORS),
-    location : {
-      lat : getRandomDecimal(35.65, 35.7, 5),
-      lng : getRandomDecimal(139.7, 139.8, 5),
-    },
+  const location = {
+    lat : getRandomDecimal(LATITUDE_MIN, LATITUDE_MAX, LAT_LNG_PRECISION),
+    lng : getRandomDecimal(LONGITUDE_MIN, LONGITUDE_MAX, LAT_LNG_PRECISION),
   };
-  advert.offer = getRandOffer(advert.location);
-  return advert;
+
+  return {
+    author: getRandomElement(AUTHORS),
+    location : location,
+    offer: getRandOffer(location),
+  };
 };
 
 
-const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(() => getRandomAdvert());
-
+const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(getRandomAdvert);
 randomAdverts;
