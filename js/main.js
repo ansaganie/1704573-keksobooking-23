@@ -1,39 +1,5 @@
-/**
- * Return a random integer from min(included) to max(included)
- * @param {integer} min - positive integer, can be 0 also
- * @param {integer} max - positive integer
- * @returns {integer} random number
- */
-const getRandomInt = (min, max) => {
-  if (min === max) {
-    return min;
-  }
-
-  if (min < 0 || min > max) {
-    return undefined;
-  }
-
-  return Math.round(Math.random() * (min - max)) + Math.floor(max);
-};
-
-/**
- * Returns a random number from min (included) to max (included)
- * @param {number} min - positive number, can be 0 also
- * @param {number} max - positive number
- * @param {integer} precision
- * @returns {number} random number
- */
-const getRandomDecimal = (min, max, precision) => {
-  if (min === max) {
-    return min;
-  }
-
-  if (min < 0 || min > max) {
-    return undefined;
-  }
-  const result = Math.random() * (min - max) + max;
-  return parseFloat(result.toFixed(precision));
-};
+import {getRandomPositiveFloat} from './utils/get-random-positive-float.js';
+import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
 
 const RANDOM_ADVERT_COUNT = 10;
 const OFFER_PRICE_MIN = 1500;
@@ -101,7 +67,7 @@ const OFFER_PHOTOS = [
  * @param {array} arr - array of any length;
  * @returns {any} random element
  */
-const getRandomElement = (arr) => arr[getRandomInt(0, arr.length - 1)];
+const getRandomElement = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
 
 /**
  * Return a random subarray from given array and length
@@ -119,18 +85,20 @@ const getRandomSubArray = (arr, arrLength) => {
  * @param {object} location - location object with latitude and longitude values;
  * @returns {object} random offer
  */
-const getRandOffer = (location) => ({
+const getRandomOffer = (location) => ({
   title : getRandomElement(OFFER_TITLE),
   address : `${location.lat}, ${location.lng}`,
-  price : getRandomInt(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
+  price : getRandomPositiveInteger(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
   type : getRandomElement(OFFER_TYPES),
-  rooms : getRandomInt(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
-  guests : getRandomInt(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
+  rooms : getRandomPositiveInteger(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
+  guests : getRandomPositiveInteger(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
   checkin : getRandomElement(OFFER_CHECK_TIMES),
   checkout : getRandomElement(OFFER_CHECK_TIMES),
-  features : getRandomSubArray(OFFER_FEATURES, getRandomInt(1, OFFER_FEATURES.length - 1)),
+  features : getRandomSubArray(OFFER_FEATURES,
+    getRandomPositiveInteger(1, OFFER_FEATURES.length - 1)),
   description : getRandomElement(OFFER_DESCRIPTIONS),
-  photos : getRandomSubArray(OFFER_PHOTOS, getRandomInt(PHOTO_COUNT_MIN, PHOTO_COUNT_MAX)),
+  photos : getRandomSubArray(OFFER_PHOTOS,
+    getRandomPositiveInteger(PHOTO_COUNT_MIN, PHOTO_COUNT_MAX)),
 });
 
 /**
@@ -139,17 +107,15 @@ const getRandOffer = (location) => ({
  */
 const getRandomAdvert = () => {
   const location = {
-    lat : getRandomDecimal(LATITUDE_MIN, LATITUDE_MAX, LAT_LNG_PRECISION),
-    lng : getRandomDecimal(LONGITUDE_MIN, LONGITUDE_MAX, LAT_LNG_PRECISION),
+    lat : getRandomPositiveFloat(LATITUDE_MIN, LATITUDE_MAX, LAT_LNG_PRECISION),
+    lng : getRandomPositiveFloat(LONGITUDE_MIN, LONGITUDE_MAX, LAT_LNG_PRECISION),
   };
-
   return {
     author: getRandomElement(AUTHORS),
     location : location,
-    offer: getRandOffer(location),
+    offer: getRandomOffer(location),
   };
 };
-
 
 const randomAdverts = new Array(RANDOM_ADVERT_COUNT).fill(null).map(getRandomAdvert);
 randomAdverts;
