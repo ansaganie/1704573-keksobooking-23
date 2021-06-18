@@ -1,7 +1,7 @@
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-function getRandomPositiveInteger (first, second) {
+function getRandomPositiveInteger(first, second) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
   // а какое из них большее и меньшее вычислим с помощью Math.min и Math.max.
@@ -30,7 +30,7 @@ function getRandomPositiveInteger (first, second) {
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-function getRandomPositiveFloat (first, second, digits = 1) {
+function getRandomPositiveFloat(first, second, digits = 1) {
   // Чтобы не заставлять пользователя нашей функции помнить порядок аргументов,
   // реализуем поддержку передачи минимального и максимального значения в любом порядке,
   // а какое из них большее и меньшее вычислим с помощью Math.min и Math.max
@@ -51,23 +51,29 @@ function getRandomPositiveFloat (first, second, digits = 1) {
 }
 
 /**
-* Return a random element from an array
-* @param {array} arr - array of any length;
-* @returns {any} random element
-*/
-const getRandomElement = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
+ * Return a random element from an array
+ * @param {array} arr - array of any length;
+ * @returns {any} random element
+ */
+const getRandomElement = (arr) =>
+  arr[getRandomPositiveInteger(0, arr.length - 1)];
 
 /**
-* Return a random subarray from given array and length
-* @param {array} arr - array of any length;
-* @param {integer} - length of result array
-* @returns {array} new subarray;
-*/
+ * Return a random subarray from given array and length
+ * @param {array} arr - array of any length;
+ * @param {integer} - length of result array
+ * @returns {array} new subarray;
+ */
 const getRandomSubArray = (arr, arrLength) => {
-  const subArr = new Array(arrLength).fill(undefined).map(() => getRandomElement(arr));
+  const subArr = new Array(arrLength)
+    .fill(undefined)
+    .map(() => getRandomElement(arr));
   return new Set(subArr);
 };
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomElement,
-  getRandomSubArray};
-
+export {
+  getRandomPositiveInteger,
+  getRandomPositiveFloat,
+  getRandomElement,
+  getRandomSubArray
+};

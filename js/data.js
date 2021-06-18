@@ -1,5 +1,9 @@
-import {getRandomPositiveInteger, getRandomPositiveFloat,
-  getRandomElement, getRandomSubArray} from './utils.js';
+import {
+  getRandomPositiveInteger,
+  getRandomPositiveFloat,
+  getRandomElement,
+  getRandomSubArray
+} from './utils.js';
 
 const OFFER_PRICE_MIN = 1500;
 const OFFER_PRICE_MAX = 5000;
@@ -15,25 +19,51 @@ const LONGITUDE_MIN = 139.7;
 const LONGITUDE_MAX = 139.8;
 const LAT_LNG_PRECISION = 5;
 
-const AUTHORS = ['Aras Mayer', 'Ehsan Bain', 'Fearne Armstrong',
-  'Yasmine Contreras', 'Amisha Figueroa', 'Harper-Rose Sparrow', 'Kyran Boyce',
-  'Tia Roth', 'Ayse Haynes', 'Yahya Mckee', 'Ananya Manning', 'Larry Wheatley',
-  'Alaw Washington', 'Amelia Mackenzie', 'Yazmin Smart', 'Awais Hawes'];
+const AUTHORS = [
+  'Aras Mayer',
+  'Ehsan Bain',
+  'Fearne Armstrong',
+  'Yasmine Contreras',
+  'Amisha Figueroa',
+  'Harper-Rose Sparrow',
+  'Kyran Boyce',
+  'Tia Roth',
+  'Ayse Haynes',
+  'Yahya Mckee',
+  'Ananya Manning',
+  'Larry Wheatley',
+  'Alaw Washington',
+  'Amelia Mackenzie',
+  'Yazmin Smart',
+  'Awais Hawes',
+];
 
 const OFFER_TITLE = [
-  'Oakwood Premier Tokyo', 'Hotel ICHIGAYA（JR Ichigaya Sta.)',
-  'TOE LIBRARY Tokyo Asakusa', 'SCASA NishiShinjuku', 'COTO Tokyo Shibuya 4',
-  'Studio Inn Nishi Shinjuku', 'COTO Tokyo Shibuya 2',
-  'Stay SAKURA Tokyo Shinjuku Hyaku Kura', 'Hotel Axas Nihonbashi',
-  'Space F 代々木', 'Hermitage Nishi Shinjuku',
+  'Oakwood Premier Tokyo',
+  'Hotel ICHIGAYA（JR Ichigaya Sta.)',
+  'TOE LIBRARY Tokyo Asakusa',
+  'SCASA NishiShinjuku',
+  'COTO Tokyo Shibuya 4',
+  'Studio Inn Nishi Shinjuku',
+  'COTO Tokyo Shibuya 2',
+  'Stay SAKURA Tokyo Shinjuku Hyaku Kura',
+  'Hotel Axas Nihonbashi',
+  'Space F 代々木',
+  'Hermitage Nishi Shinjuku',
 ];
 
 const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const OFFER_CHECK_TIMES = ['12:00', '13:00', '14:00'];
 
-const  OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer',
-  'elevator', 'conditioner'];
+const OFFER_FEATURES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
 
 const OFFER_DESCRIPTIONS = [
   `This accommodation is located near “Hikifune” station. You can reach there on foot
@@ -61,26 +91,29 @@ const OFFER_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-
 /**
  * Generates a random offer from given list of data
  * @param {object} location - location object with latitude and longitude values;
  * @returns {object} random offer
  */
 const getRandomOffer = (location) => ({
-  title : getRandomElement(OFFER_TITLE),
-  address : `${location.lat}, ${location.lng}`,
-  price : getRandomPositiveInteger(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
-  type : getRandomElement(OFFER_TYPES),
-  rooms : getRandomPositiveInteger(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
-  guests : getRandomPositiveInteger(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
-  checkin : getRandomElement(OFFER_CHECK_TIMES),
-  checkout : getRandomElement(OFFER_CHECK_TIMES),
-  features : getRandomSubArray(OFFER_FEATURES,
-    getRandomPositiveInteger(1, OFFER_FEATURES.length - 1)),
-  description : getRandomElement(OFFER_DESCRIPTIONS),
-  photos : getRandomSubArray(OFFER_PHOTOS,
-    getRandomPositiveInteger(PHOTO_COUNT_MIN, PHOTO_COUNT_MAX)),
+  title: getRandomElement(OFFER_TITLE),
+  address: `${location.lat}, ${location.lng}`,
+  price: getRandomPositiveInteger(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
+  type: getRandomElement(OFFER_TYPES),
+  rooms: getRandomPositiveInteger(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
+  guests: getRandomPositiveInteger(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
+  checkin: getRandomElement(OFFER_CHECK_TIMES),
+  checkout: getRandomElement(OFFER_CHECK_TIMES),
+  features: getRandomSubArray(
+    OFFER_FEATURES,
+    getRandomPositiveInteger(1, OFFER_FEATURES.length - 1),
+  ),
+  description: getRandomElement(OFFER_DESCRIPTIONS),
+  photos: getRandomSubArray(
+    OFFER_PHOTOS,
+    getRandomPositiveInteger(PHOTO_COUNT_MIN, PHOTO_COUNT_MAX),
+  ),
 });
 
 /**
@@ -89,15 +122,18 @@ const getRandomOffer = (location) => ({
  */
 const getRandomAdvert = () => {
   const location = {
-    lat : getRandomPositiveFloat(LATITUDE_MIN, LATITUDE_MAX, LAT_LNG_PRECISION),
-    lng : getRandomPositiveFloat(LONGITUDE_MIN, LONGITUDE_MAX, LAT_LNG_PRECISION),
+    lat: getRandomPositiveFloat(LATITUDE_MIN, LATITUDE_MAX, LAT_LNG_PRECISION),
+    lng: getRandomPositiveFloat(
+      LONGITUDE_MIN,
+      LONGITUDE_MAX,
+      LAT_LNG_PRECISION,
+    ),
   };
   return {
     author: getRandomElement(AUTHORS),
-    location : location,
+    location: location,
     offer: getRandomOffer(location),
   };
 };
 
-export {getRandomAdvert};
-
+export { getRandomAdvert };
