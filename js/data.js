@@ -7,10 +7,6 @@ import {
 
 const OFFER_PRICE_MIN = 1500;
 const OFFER_PRICE_MAX = 5000;
-const ROOM_COUNT_MIN = 1;
-const ROOM_COUNT_MAX = 10;
-const GUEST_COUNT_MIN = 1;
-const GUEST_COUNT_MAX = 10;
 const PHOTO_COUNT_MIN = 2;
 const PHOTO_COUNT_MAX = 4;
 const LATITUDE_MIN = 35.65;
@@ -55,6 +51,10 @@ const OFFER_TITLE = [
 const OFFER_TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const OFFER_CHECK_TIMES = ['12:00', '13:00', '14:00'];
+
+const OFFER_ROOM_COUNT = [1, 2, 3, 100];
+
+const OFFER_GUEST_COUNT = [0, 1, 2, 3];
 
 const OFFER_FEATURES = [
   'wifi',
@@ -101,8 +101,8 @@ const getRandomOffer = (location) => ({
   address: `${location.lat}, ${location.lng}`,
   price: getRandomPositiveInteger(OFFER_PRICE_MIN, OFFER_PRICE_MAX),
   type: getRandomElement(OFFER_TYPES),
-  rooms: getRandomPositiveInteger(ROOM_COUNT_MIN, ROOM_COUNT_MAX),
-  guests: getRandomPositiveInteger(GUEST_COUNT_MIN, GUEST_COUNT_MAX),
+  rooms: getRandomElement(OFFER_ROOM_COUNT),
+  guests: getRandomElement(OFFER_GUEST_COUNT),
   checkin: getRandomElement(OFFER_CHECK_TIMES),
   checkout: getRandomElement(OFFER_CHECK_TIMES),
   features: getRandomSubArray(
