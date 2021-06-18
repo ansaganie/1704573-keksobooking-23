@@ -1,5 +1,5 @@
-import {getRandomPositiveFloat} from './utils/get-random-positive-float.js';
-import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
+import {getRandomPositiveInteger, getRandomPositiveFloat,
+  getRandomElement, getRandomSubArray} from './utils.js';
 
 const OFFER_PRICE_MIN = 1500;
 const OFFER_PRICE_MAX = 5000;
@@ -61,23 +61,6 @@ const OFFER_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-/**
- * Return a random element from an array
- * @param {array} arr - array of any length;
- * @returns {any} random element
- */
-const getRandomElement = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
-
-/**
- * Return a random subarray from given array and length
- * @param {array} arr - array of any length;
- * @param {integer} - length of result array
- * @returns {array} new subarray;
- */
-const getRandomSubArray = (arr, arrLength) => {
-  const subArr = new Array(arrLength).fill(undefined).map(() => getRandomElement(arr));
-  return new Set(subArr);
-};
 
 /**
  * Generates a random offer from given list of data
