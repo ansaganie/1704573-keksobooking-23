@@ -6,7 +6,7 @@ import {
 } from './utils.js';
 
 const OFFER_PRICE_MIN = 1500;
-const OFFER_PRICE_MAX = 5000;
+const OFFER_PRICE_MAX = 50000;
 const PHOTO_COUNT_MIN = 2;
 const PHOTO_COUNT_MAX = 4;
 const LATITUDE_MIN = 35.65;
@@ -15,7 +15,7 @@ const LONGITUDE_MIN = 139.7;
 const LONGITUDE_MAX = 139.8;
 const LAT_LNG_PRECISION = 5;
 
-const AUTHORS = [
+const AUTHORS_NAME = [
   'Aras Mayer',
   'Ehsan Bain',
   'Fearne Armstrong',
@@ -116,6 +116,12 @@ const getRandomOffer = (location) => ({
   ),
 });
 
+const getRandomAvatar = ()  => {
+  const randomInt = getRandomPositiveInteger(1, 11)
+  const imgNumber = randomInt < 10 ? `0${randomInt}` : randomInt;
+  return `img/avatars/user${imgNumber}.png`;
+};
+
 /**
  * Generates a random advertisement from given list of data
  * @returns {object} random advert
@@ -130,7 +136,10 @@ const getRandomAdvert = () => {
     ),
   };
   return {
-    author: getRandomElement(AUTHORS),
+    author: {
+      name: getRandomElement(AUTHORS_NAME),
+      avatar: getRandomAvatar(),
+    },
     location: location,
     offer: getRandomOffer(location),
   };
