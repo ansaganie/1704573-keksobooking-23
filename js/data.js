@@ -117,7 +117,7 @@ const getRandomOffer = (location) => ({
 });
 
 const getRandomAvatar = ()  => {
-  const randomInt = getRandomPositiveInteger(1, 11)
+  const randomInt = getRandomPositiveInteger(1, 11);
   const imgNumber = randomInt < 10 ? `0${randomInt}` : randomInt;
   return `img/avatars/user${imgNumber}.png`;
 };
