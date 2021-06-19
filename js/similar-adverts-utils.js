@@ -2,8 +2,12 @@
  * Creates <li> elements of corresponiding features from 'featuresList' array
  * @param {array} featureList list of strings
  * @returns {DocumentFragment}
-*/
+ */
 const createFeaturesList = (featuresList) => {
+  if (featuresList === null) {
+    return null;
+  }
+
   const bucket = document.createDocumentFragment();
 
   const listElem = document.createElement('li');
@@ -24,8 +28,11 @@ const createFeaturesList = (featuresList) => {
  * @param {array} photosList list of strings with images 'src'
  * @param {HTMLElement} imgElement template of <img> element
  * @returns {DocumentFragment}
-*/
+ */
 const createPhotosList = (photosList, imgElement) => {
+  if (photosList === null) {
+    return null;
+  }
   const bucket = document.createDocumentFragment();
   photosList.forEach((elem) => {
     const newImg = imgElement.cloneNode(true);
@@ -51,4 +58,40 @@ const createRoomAndGuestText = (rooms, guests) => {
   }`;
 };
 
-export{ createFeaturesList, createPhotosList, createRoomAndGuestText };
+/**
+ * Updates/initializes the property of given element with the passed object.
+ * If the passed object is 'null' or 'undefined' if visually hides the element
+ * @param {HTMLElement} element element to be updated
+ * @param {string} propertyName attribute name to be updated or initialized
+ * @param {string} text value to be set to property
+ */
+const updatePropertyOrHide = (element, propertyName, text) => {
+  if (text === null || text === undefined) {
+    element.classList.add('hidden');
+    return;
+  }
+  element[propertyName] = text;
+};
+
+/**
+ * Appends given DocumentFragment to given element, but if the fragment is null,
+ * it hides the element visually
+ * @param {HTMLElement} element element to be updated
+ * @param {DocumentFragment} fragment fragment of HTML elements
+ */
+const appendChildOrHide = (element, fragment) => {
+  if (fragment === null) {
+    element.classList.add('hidden');
+    return;
+  }
+  element.textContent = '';
+  element.appendChild(fragment);
+};
+
+export {
+  createFeaturesList,
+  createPhotosList,
+  createRoomAndGuestText,
+  updatePropertyOrHide,
+  appendChildOrHide,
+};
