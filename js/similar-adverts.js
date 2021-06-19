@@ -8,6 +8,13 @@ import {
 } from './similar-adverts-utils.js';
 
 const RANDOM_ADVERT_COUNT = 10;
+const TYPES_IN_RUSSIAN = {
+  'flat' : 'Квартира',
+  'bungalow' : 'Бунгало',
+  'house' : 'Дом',
+  'palace' : 'Дворец',
+  'hotel' : 'Отель',
+};
 
 const cardTemplate = document
   .querySelector('#card')
@@ -35,7 +42,7 @@ const generateCard = ({ author, offer }) => {
   updatePropertyOrHide(
     newCard.querySelector('.popup__type'),
     'textContent',
-    offer.type,
+    TYPES_IN_RUSSIAN[offer.type],
   );
 
   updatePropertyOrHide(
