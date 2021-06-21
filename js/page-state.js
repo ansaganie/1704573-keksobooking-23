@@ -9,7 +9,8 @@ const deactivatePage = () => {
   mapFilters.classList.add('ad-form--disabled');
   disableOrEnableElements(
     true,
-    document.querySelectorAll('fieldset'),
+    ...advertForm.children,
+    ...mapFilters.children,
   );
 };
 
@@ -20,7 +21,8 @@ const activatePage = () => {
   mapFilters.classList.remove('ad-form--disabled');
   disableOrEnableElements(
     true,
-    document.querySelectorAll('fieldset'),
+    ...advertForm.children,
+    ...mapFilters.children,
   );
 };
 
