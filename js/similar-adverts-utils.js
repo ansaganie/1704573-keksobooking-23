@@ -84,7 +84,7 @@ const appendChildOrHide = (element, fragment) => {
     element.classList.add('hidden');
     return;
   }
-  element.textContent = '';
+  element.innerHTML = '';
   element.appendChild(fragment);
 };
 
