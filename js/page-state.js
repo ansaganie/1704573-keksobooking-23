@@ -20,7 +20,7 @@ const activatePage = () => {
   advertForm.classList.remove('ad-form--disabled');
   mapFilters.classList.remove('ad-form--disabled');
   disableOrEnableElements(
-    true,
+    false,
     ...advertForm.children,
     ...mapFilters.children,
   );
