@@ -1028,3 +1028,48 @@ fieldset {
 .hidden {
   display: none;
 }
+
+.validation-message {
+  display: block;
+  color: red;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.prompt {
+  position: relative;
+  display: inline-block;
+}
+
+.prompt .prompttext {
+  visibility: hidden;
+  width: 150px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.prompt .prompttext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.prompt:hover .prompttext {
+  visibility: visible;
+  opacity: 1;
+}
