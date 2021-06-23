@@ -1,4 +1,5 @@
 import './similar-adverts.js';
-import { deactivatePage } from './page-state.js';
+import './form.js';
+//import { deactivatePage } from './page-state.js';
 
-deactivatePage();
+//deactivatePage();
