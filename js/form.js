@@ -13,8 +13,8 @@ const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 
 const address = advertForm.querySelector('#address');
 
-//const timein = advertForm.querySelector('#timein');
-//const timeout = advertForm.querySelector('#timeout');
+const timein = advertForm.querySelector('#timein');
+const timeout = advertForm.querySelector('#timeout');
 
 //this is a temporary value shows the coordinates of the center of Tokyo
 address.value = '35.65858 139.74543';
@@ -36,8 +36,17 @@ price.addEventListener('blur', () => {
 });
 
 type.addEventListener('change', () => {
+
   price.placeholder = TYPE_MIN_PRICE[type.value];
   price.min = TYPE_MIN_PRICE[type.value];
+});
+
+timein.addEventListener('change', () => {
+  timeout.value = timein.value;
+});
+
+timeout.addEventListener('change', () => {
+  timein.value = timeout.value;
 });
 
 formSubmitButton.addEventListener('click', (evt) => {
