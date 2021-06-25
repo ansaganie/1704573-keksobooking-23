@@ -1,5 +1,10 @@
-import { price, validatePrice } from './form-validate-price.js';
 import { validateTitle, title } from './form-validate-title.js';
+import {
+  price,
+  type,
+  validatePrice,
+  changePricePlaceholderAndMin
+} from './form-validate-price-type.js';
 import {
   validateRoomNumberAndCapacity,
   synchronizeRoomNumberAndCapacity,
@@ -16,6 +21,7 @@ const callAndAddInputListener = (elem, func) => {
     func();
     elem.addEventListener('input', func);
   };
+
   return callback;
 };
 
@@ -31,6 +37,8 @@ roomNumber.addEventListener('change', synchronizeRoomNumberAndCapacity);
 title.addEventListener('blur', callAndAddInputListener(title, validateTitle));
 
 price.addEventListener('blur', callAndAddInputListener(price, validatePrice));
+
+type.addEventListener('change', changePricePlaceholderAndMin);
 
 formSubmitButton.addEventListener('click', (evt) => {
   const isTitleValid = validateTitle();
