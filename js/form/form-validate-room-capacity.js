@@ -38,6 +38,7 @@ const synchronizeRoomNumberAndCapacity = () => {
       option.disabled = false;
     }
   }
+
   validateRoomNumberAndCapacity();
 };
 

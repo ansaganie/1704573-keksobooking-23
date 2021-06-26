@@ -23,6 +23,7 @@ const validateTitle = () => {
     messageElement.textContent = `Максимум ${TITLE_MAX_LENGTH} символов`;
     return false;
   }
+
   messageElement.textContent = '';
   return true;
 };
