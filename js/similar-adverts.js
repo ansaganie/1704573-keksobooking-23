@@ -7,11 +7,11 @@ import {
 } from './similar-adverts-utils.js';
 
 const TYPES_IN_RUSSIAN = {
-  'flat' : 'Квартира',
-  'bungalow' : 'Бунгало',
-  'house' : 'Дом',
-  'palace' : 'Дворец',
-  'hotel' : 'Отель',
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
 };
 
 const cardTemplate = document

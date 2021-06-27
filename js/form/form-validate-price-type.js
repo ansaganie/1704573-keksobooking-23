@@ -1,11 +1,11 @@
 const PRICE_MAX_VALUE = '1 000 000';
 const NUMBER_PATTERN = /^\D+$/;
 const TYPE_MIN_PRICE = {
-  'bungalow': 0,
-  'flat': 1000,
-  'hotel': 3000,
-  'house': 5000,
-  'palace': 10000,
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const type = document.querySelector('#type');
@@ -26,7 +26,9 @@ const validatePrice = () => {
   }
 
   if (validity.rangeUnderflow) {
-    messageElement.textContent = `Минимальная цена ${TYPE_MIN_PRICE[type.value]}`;
+    messageElement.textContent = `Минимальная цена ${
+      TYPE_MIN_PRICE[type.value]
+    }`;
     return false;
   }
 
@@ -44,9 +46,4 @@ const changePricePlaceholderAndMin = () => {
   price.min = TYPE_MIN_PRICE[type.value];
 };
 
-export {
-  price,
-  type,
-  validatePrice,
-  changePricePlaceholderAndMin
-};
+export { price, type, validatePrice, changePricePlaceholderAndMin };

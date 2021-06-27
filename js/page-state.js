@@ -1,5 +1,5 @@
 const disableOrEnableElements = (disabled, ...elements) => {
-  elements.forEach((elem) => elem.disabled = disabled);
+  elements.forEach((elem) => (elem.disabled = disabled));
 };
 
 const deactivatePage = () => {
@@ -7,11 +7,7 @@ const deactivatePage = () => {
   const mapFilters = document.querySelector('.map__filters');
   advertForm.classList.add('ad-form--disabled');
   mapFilters.classList.add('ad-form--disabled');
-  disableOrEnableElements(
-    true,
-    ...advertForm.children,
-    ...mapFilters.children,
-  );
+  disableOrEnableElements(true, ...advertForm.children, ...mapFilters.children);
 };
 
 const activatePage = () => {

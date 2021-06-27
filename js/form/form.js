@@ -15,6 +15,7 @@ import {
 const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 
+
 const callAndAddInputListener = (elem, func) => {
   const callback = () => {
     func();

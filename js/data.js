@@ -16,7 +16,6 @@ const LONGITUDE_MAX = 139.8;
 const LAT_LNG_PRECISION = 5;
 const RANDOM_ADVERT_COUNT = 10;
 
-
 const AUTHORS_NAME = [
   'Aras Mayer',
   'Ehsan Bain',
@@ -118,7 +117,7 @@ const getRandomOffer = (location) => ({
   ),
 });
 
-const getRandomAvatar = ()  => {
+const getRandomAvatar = () => {
   const randomInt = getRandomPositiveInteger(1, 11);
   const imgNumber = randomInt < 10 ? `0${randomInt}` : randomInt;
   return `img/avatars/user${imgNumber}.png`;
