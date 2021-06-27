@@ -14,7 +14,6 @@ import {
 
 const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
-const address = advertForm.querySelector('#address');
 
 const callAndAddInputListener = (elem, func) => {
   const callback = () => {
@@ -24,9 +23,6 @@ const callAndAddInputListener = (elem, func) => {
 
   return callback;
 };
-
-//this is a temporary value shows the coordinates of the center of Tokyo
-address.value = '35.65858 139.74543';
 
 synchronizeRoomNumberAndCapacity();
 
