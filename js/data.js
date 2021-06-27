@@ -14,6 +14,8 @@ const LATITUDE_MAX = 35.7;
 const LONGITUDE_MIN = 139.7;
 const LONGITUDE_MAX = 139.8;
 const LAT_LNG_PRECISION = 5;
+const RANDOM_ADVERT_COUNT = 10;
+
 
 const AUTHORS_NAME = [
   'Aras Mayer',
@@ -145,4 +147,8 @@ const getRandomAdvert = () => {
   };
 };
 
-export { getRandomAdvert };
+const randomAdverts = new Array(RANDOM_ADVERT_COUNT)
+  .fill(null)
+  .map(getRandomAdvert);
+
+export { randomAdverts };
