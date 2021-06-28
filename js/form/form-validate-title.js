@@ -28,7 +28,4 @@ const validateTitle = () => {
   return true;
 };
 
-export {
-  title,
-  validateTitle
-};
+export { title, validateTitle };

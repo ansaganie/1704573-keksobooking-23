@@ -1,4 +1,3 @@
-import { getRandomAdvert } from './data.js';
 import {
   createFeaturesList,
   createPhotosList,
@@ -7,23 +6,17 @@ import {
   appendChildOrHide
 } from './similar-adverts-utils.js';
 
-const RANDOM_ADVERT_COUNT = 10;
 const TYPES_IN_RUSSIAN = {
-  'flat' : 'Квартира',
-  'bungalow' : 'Бунгало',
-  'house' : 'Дом',
-  'palace' : 'Дворец',
-  'hotel' : 'Отель',
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
 };
 
 const cardTemplate = document
   .querySelector('#card')
   .content.querySelector('.popup');
-const mapCanvas = document.querySelector('#map-canvas');
-
-const randomAdverts = new Array(RANDOM_ADVERT_COUNT)
-  .fill(null)
-  .map(getRandomAdvert);
 
 const generateCard = ({ author, offer }) => {
   const newCard = cardTemplate.cloneNode(true);
@@ -81,4 +74,4 @@ const generateCard = ({ author, offer }) => {
   return newCard;
 };
 
-mapCanvas.appendChild(generateCard(randomAdverts[0]));
+export { generateCard };

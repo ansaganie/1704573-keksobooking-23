@@ -2,17 +2,17 @@ const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 
 const ROOM_AND_CAPACITY = {
-  '1': ['1'],
-  '2': ['1', '2'],
-  '3': ['1', '2', '3'],
-  '100': ['0'],
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
 };
 
 const ROOM_CAPACITY_ERROR_MESSAGE = {
-  '1': '1 комната = 1 гость',
-  '2': '2 комнаты = 1 или 2 гостей',
-  '3': '3 комнаты = 1, 2 или 3 гостей',
-  '100': '100 комнат не для гостей',
+  1: '1 комната = 1 гость',
+  2: '2 комнаты = 1 или 2 гостей',
+  3: '3 комнаты = 1, 2 или 3 гостей',
+  100: '100 комнат не для гостей',
 };
 
 const validateRoomNumberAndCapacity = () => {
