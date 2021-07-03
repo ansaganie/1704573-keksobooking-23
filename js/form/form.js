@@ -11,10 +11,11 @@ import {
   capacity,
   roomNumber
 } from './form-validate-room-capacity.js';
+import { resetMap } from '../map.js';
 
 const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
-
+const formResetButton = advertForm.querySelector('.ad-form__reset');
 
 const callAndAddInputListener = (elem, func) => {
   const callback = () => {
@@ -25,7 +26,23 @@ const callAndAddInputListener = (elem, func) => {
   return callback;
 };
 
+const resetValidationMessages = () => {
+  const validationMessages = document.querySelectorAll('.validation-message');
+  validationMessages.forEach((message)=> {
+    message.textContent = '';
+  });
+};
+
+const resetForm = () => {
+  advertForm.reset();
+  resetMap();
+  changePricePlaceholderAndMin();
+  resetValidationMessages();
+};
+
 synchronizeRoomNumberAndCapacity();
+
+formResetButton.addEventListener('click', resetForm);
 
 capacity.addEventListener('change', validateRoomNumberAndCapacity);
 
