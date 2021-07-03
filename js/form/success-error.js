@@ -1,21 +1,42 @@
-import { isEsc, removeElementItself } from '../utils.js';
+import { isEsc } from '../utils.js';
+
+const CAPTURE = {
+  'once' : true,
+};
+
+const destroyElement = (element) => (evt) => {
+  if (element.parentNode && (isEsc(evt.key) || evt.type === 'click')) {
+    element.parentNode.removeChild(element);
+  }
+};
 
 const showSuccessMessage = ()  => {
   const success = document.querySelector('#success')
     .content
-    .querySelector('.success');
+    .querySelector('.success')
+    .cloneNode(true);
 
   document.body.appendChild(success);
 
-  success.addEventListener('click', removeElementItself.bind(null, success));
-  document.addEventListener('keydown', (evt) => {
-    if (isEsc(evt.key)) {
-      removeElementItself(success);
-    }
-  });
+  success.addEventListener('click', destroyElement(success), CAPTURE);
+  document.addEventListener('keydown', destroyElement(success), CAPTURE);
+};
+
+const showErrorMessage = ()  => {
+  const error = document.querySelector('#error')
+    .content
+    .querySelector('.error')
+    .cloneNode(true);
+
+  const errorButton = error.querySelector('.error__button');
+  document.body.appendChild(error);
+
+  error.addEventListener('click', destroyElement(error), CAPTURE);
+  document.addEventListener('keydown', destroyElement(error), CAPTURE);
+  errorButton.addEventListener('click', destroyElement(error), CAPTURE);
 };
 
 export {
-  showSuccessMessage
+  showSuccessMessage,
+  showErrorMessage
 };
-
