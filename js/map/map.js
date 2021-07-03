@@ -1,5 +1,8 @@
 import { deactivatePage, activatePage} from '../page-state.js';
 import { generateCard } from './similar-adverts.js';
+import { address, validateAddress } from '../form/form-validate-address.js';
+import { getData } from '../api.js';
+import { showServerErrorMessage } from '../utils.js';
 
 const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
@@ -21,7 +24,6 @@ const TOKYO_CENTER = {
 const SCALE = 13;
 
 const mapContainer = document.querySelector('#map-canvas');
-const address = document.querySelector('#address');
 
 const map = L.map(mapContainer);
 const layer = L.layerGroup().addTo(map);
@@ -33,10 +35,7 @@ const mainPinIcon = L.icon({
 });
 
 const mainPinMarker = L.marker(
-  {
-    lat: TOKYO_CENTER.lat,
-    lng: TOKYO_CENTER.lng,
-  },
+  TOKYO_CENTER,
   {
     draggable: true,
     icon: mainPinIcon,
@@ -48,7 +47,6 @@ const popupIcon = L.icon({
   iconSize: [POPUP_ICON_HEIGHT, POPUP_ICON_WIDTH],
   iconAnchor: [POPUP_ANCHOR_X, POPUP_ANCHOR_Y],
 });
-
 
 const createPopups = (adverts) => {
   adverts.forEach((advert) => {
@@ -65,6 +63,7 @@ const createPopups = (adverts) => {
 const changeAddressValue = ({ target }) => {
   const latlng = target.getLatLng();
   address.value = `${latlng.lat.toFixed(5)} ${latlng.lng.toFixed(5)}`;
+  validateAddress();
 };
 
 const resetMap = ()=> {
@@ -82,6 +81,6 @@ L.tileLayer( MAP_PROVIDER_LINK, {
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
 
-export { createPopups,
-  resetMap
-};
+getData(createPopups, showServerErrorMessage);
+
+export { resetMap };
