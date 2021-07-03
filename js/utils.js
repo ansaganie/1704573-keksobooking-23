@@ -85,14 +85,11 @@ const showServerErrorMessage = () => {
 
 const isEsc = (keyCode) => keyCode === 'Escape';
 
-const removeElementItself = (element) => element.parentNode.removeChild(element);
-
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getRandomElement,
   getRandomSubArray,
   showServerErrorMessage,
-  isEsc,
-  removeElementItself
+  isEsc
 };
