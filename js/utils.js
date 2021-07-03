@@ -73,16 +73,26 @@ const getRandomSubArray = (arr, arrLength) => {
   return new Set(subArr);
 };
 
+/**
+ * Shows and hides hardcoded server error message and hides it after fixed time
+ * @returns {void};
+ */
 const showServerErrorMessage = () => {
   const errorMessage = document.body.querySelector('.server-error');
   errorMessage.classList.remove('hidden');
   setTimeout(()=>errorMessage.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
 };
 
+const isEsc = (keyCode) => keyCode === 'Escape';
+
+const removeElementItself = (element) => element.parentNode.removeChild(element);
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getRandomElement,
   getRandomSubArray,
-  showServerErrorMessage
+  showServerErrorMessage,
+  isEsc,
+  removeElementItself
 };
