@@ -1,6 +1,8 @@
 import { activatePage } from './page-state.js';
-import { randomAdverts } from './data.js';
 import { generateCard } from './similar-adverts.js';
+
+const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
@@ -14,6 +16,7 @@ const TOKYO_CENTER = {
   lat: 35.658581,
   lng: 139.745438,
 };
+const SCALE = 13;
 
 const mapContainer = document.querySelector('#map-canvas');
 const address = document.querySelector('#address');
@@ -44,19 +47,21 @@ const popupIcon = L.icon({
 
 const layer = L.layerGroup().addTo(map);
 
-const createPopup = (advert) => {
-  const { lat, lng } = advert.location;
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      popupIcon,
-    },
-  );
+const createPopups = (adverts) => {
+  adverts.forEach((advert) => {
+    const { lat, lng } = advert.location;
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        popupIcon,
+      },
+    );
 
-  marker.addTo(layer).bindPopup(generateCard(advert));
+    marker.addTo(layer).bindPopup(generateCard(advert));
+  });
 };
 
 const changeAddressValue = ({ target }) => {
@@ -69,16 +74,15 @@ map.on('load', activatePage).setView(
     lat: TOKYO_CENTER.lat,
     lng: TOKYO_CENTER.lng,
   },
-  12,
+  SCALE,
 );
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+L.tileLayer( MAP_PROVIDER_LINK, {
+  attribution: OPEN_STREET_MAP_ATTR,
 }).addTo(map);
 
 mainPinMarker.on('add', changeAddressValue);
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
 
-randomAdverts.forEach(createPopup);
+export { createPopups };
