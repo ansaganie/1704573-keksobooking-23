@@ -22,6 +22,4 @@ const activatePage = () => {
   );
 };
 
-deactivatePage();
-
 export { deactivatePage, activatePage };

@@ -1,5 +1,3 @@
-import './similar-adverts.js';
 import './form/form.js';
-import './page-state.js';
-import './map.js';
-import './api.js';
+import './map/map.js';
+import './map/api.js';

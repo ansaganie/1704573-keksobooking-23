@@ -1,4 +1,4 @@
-import { activatePage } from './page-state.js';
+import { deactivatePage, activatePage} from '../page-state.js';
 import { generateCard } from './similar-adverts.js';
 
 const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -72,6 +72,7 @@ const resetMap = ()=> {
   map.setView(TOKYO_CENTER, SCALE);
 };
 
+deactivatePage();
 map.on('load', activatePage).setView(TOKYO_CENTER, SCALE);
 
 L.tileLayer( MAP_PROVIDER_LINK, {
