@@ -1,3 +1,5 @@
+const ERROR_MESSAGE_SHOW_TIME = 3000;
+
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
@@ -71,9 +73,16 @@ const getRandomSubArray = (arr, arrLength) => {
   return new Set(subArr);
 };
 
+const showServerErrorMessage = () => {
+  const errorMessage = document.body.querySelector('.server-error');
+  errorMessage.classList.remove('hidden');
+  setTimeout(()=>errorMessage.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
+};
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getRandomElement,
-  getRandomSubArray
+  getRandomSubArray,
+  showServerErrorMessage
 };
