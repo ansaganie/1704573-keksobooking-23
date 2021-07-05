@@ -3,7 +3,7 @@ import {
   price,
   type,
   validatePrice,
-  changePricePlaceholderAndMin
+  syncPricePlaceholderAndMinValue
 } from './form-validate-price-type.js';
 import {
   validateRoomNumberAndCapacity,
@@ -17,9 +17,9 @@ import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
 
 const advertForm = document.querySelector('.ad-form');
-const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 const timein = advertForm.querySelector('#timein');
 const timeout = advertForm.querySelector('#timeout');
+const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 const formResetButton = advertForm.querySelector('.ad-form__reset');
 
 const callAndAddInputListener = (elem, func) => {
@@ -41,20 +41,20 @@ const resetValidationMessages = () => {
 const resetForm = () => {
   advertForm.reset();
   resetMap();
-  changePricePlaceholderAndMin();
+  syncPricePlaceholderAndMinValue();
   resetValidationMessages();
 };
 
-const submitFrom = (evt) => {
+const submitForm = (evt) => {
   evt.preventDefault();
 
   const isTitleValid = validateTitle();
   const isPriceValid = validatePrice();
-  const isRoomAndGuestNumberValid = validateRoomNumberAndCapacity();
+  const isRoomAndCapacityValid = validateRoomNumberAndCapacity();
   const isAddressValid = validateAddress();
 
   if (isTitleValid && isPriceValid
-     && isRoomAndGuestNumberValid && isAddressValid) {
+     && isRoomAndCapacityValid && isAddressValid) {
     sendData(new FormData(advertForm), showSuccessMessage, showErrorMessage);
   }
 };
@@ -71,7 +71,7 @@ title.addEventListener('blur', callAndAddInputListener(title, validateTitle));
 
 price.addEventListener('blur', callAndAddInputListener(price, validatePrice));
 
-type.addEventListener('change', changePricePlaceholderAndMin);
+type.addEventListener('change', syncPricePlaceholderAndMinValue);
 
 timein.addEventListener('change', () => {
   timeout.value = timein.value;
@@ -81,8 +81,6 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-formSubmitButton.addEventListener('click', submitFrom);
+formSubmitButton.addEventListener('click', submitForm);
 
-export {
-  resetForm
-};
+export { resetForm };

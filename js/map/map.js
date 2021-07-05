@@ -48,7 +48,7 @@ const popupIcon = L.icon({
   iconAnchor: [POPUP_ANCHOR_X, POPUP_ANCHOR_Y],
 });
 
-const createPopups = (adverts) => {
+const drawPopups = (adverts) => {
   adverts.forEach((advert) => {
     const marker = L.marker(
       advert.location,
@@ -81,6 +81,6 @@ L.tileLayer( MAP_PROVIDER_LINK, {
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
 
-getData(createPopups, showServerErrorMessage);
+getData(drawPopups, showServerErrorMessage);
 
 export { resetMap };

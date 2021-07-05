@@ -15,11 +15,10 @@ const showSuccessMessage = ()  => {
     .content
     .querySelector('.success')
     .cloneNode(true);
-
-  document.body.appendChild(success);
-
   success.addEventListener('click', destroyElement(success), CAPTURE);
   document.addEventListener('keydown', destroyElement(success), CAPTURE);
+
+  document.body.appendChild(success);
 };
 
 const showErrorMessage = ()  => {
@@ -29,11 +28,12 @@ const showErrorMessage = ()  => {
     .cloneNode(true);
 
   const errorButton = error.querySelector('.error__button');
-  document.body.appendChild(error);
 
   error.addEventListener('click', destroyElement(error), CAPTURE);
-  document.addEventListener('keydown', destroyElement(error), CAPTURE);
   errorButton.addEventListener('click', destroyElement(error), CAPTURE);
+  document.addEventListener('keydown', destroyElement(error), CAPTURE);
+
+  document.body.appendChild(error);
 };
 
 export {

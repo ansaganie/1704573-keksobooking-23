@@ -41,9 +41,14 @@ const validatePrice = () => {
   return true;
 };
 
-const changePricePlaceholderAndMin = () => {
+const syncPricePlaceholderAndMinValue = () => {
   price.placeholder = TYPE_MIN_PRICE[type.value];
   price.min = TYPE_MIN_PRICE[type.value];
 };
 
-export { price, type, validatePrice, changePricePlaceholderAndMin };
+export {
+  price,
+  type,
+  validatePrice,
+  syncPricePlaceholderAndMinValue
+};
