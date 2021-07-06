@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
   <script defer src="leaflet/leaflet.js"></script>
   <script type="module" src="js/main.js"></script>
   <title>Кексобукинг</title>
@@ -95,7 +95,8 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" readonly>
+          <input id="address" name="address" type="text" value="35.65858 139.74544" readonly>
+          <span class="validation-message"></span>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -237,5 +238,9 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
+  <!-- Сообщение об ошибке получения объявлении с сервера-->
+  <div class="server-error hidden">
+    <p class="server-error__message"></p>
+  </div>
 </body>
 </html>

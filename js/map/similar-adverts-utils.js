@@ -4,7 +4,7 @@
  * @returns {DocumentFragment}
  */
 const createFeaturesList = (featuresList) => {
-  if (featuresList === null) {
+  if (!featuresList) {
     return null;
   }
 
@@ -30,7 +30,7 @@ const createFeaturesList = (featuresList) => {
  * @returns {DocumentFragment}
  */
 const createPhotosList = (photosList, imgElement) => {
-  if (photosList === null) {
+  if (!photosList) {
     return null;
   }
   const bucket = document.createDocumentFragment();

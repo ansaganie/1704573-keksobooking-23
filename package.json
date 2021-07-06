@@ -24,10 +24,5 @@
     "node": "14.x",
     "npm": "6.x"
   },
-  "type": "module",
-  "prettier": {
-    "singleQuote": true,
-    "semi": true,
-    "trailingComma" : "all"
-  }
+  "type": "module"
 }
