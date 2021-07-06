@@ -9,10 +9,10 @@ const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copy
 
 const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
-const MAIN_ICON_LINK = '../img/main-pin.svg';
+const MAIN_ICON_LINK = './img/main-pin.svg';
 const POPUP_ICON_HEIGHT = 40;
 const POPUP_ICON_WIDTH = 40;
-const POPUP_ICON_LINK = '../img/pin.svg';
+const POPUP_ICON_LINK = './img/pin.svg';
 const ANCHOR_X = 26;
 const ANCHOR_Y = 52;
 const POPUP_ANCHOR_X = 20;
@@ -53,7 +53,7 @@ const drawPopups = (adverts) => {
     const marker = L.marker(
       advert.location,
       {
-        popupIcon,
+        icon: popupIcon,
       },
     );
     marker.addTo(layer).bindPopup(generateCard(advert));
