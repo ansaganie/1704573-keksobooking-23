@@ -1,29 +1,28 @@
 import { resetForm } from './form/form.js';
 
-const DATA_FETCH_LINK = 'https://23.javascript.pages.academy/keksobooking/data';
-const DATA_PUSH_LINK = 'https://23.javascript.pages.academy/keksobooking';
+const MAIN_DIRECTORY = 'https://23.javascript.pages.academy/keksobooking';
+const api = {
+  send: '',
+  get: '/data',
+};
 
 const getData = (renderPopups, showErrorMessage) => {
-  fetch(DATA_FETCH_LINK)
+  fetch(MAIN_DIRECTORY + api.get)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Data was not retreived');
+        throw new Error('Похожие объявления не загружены');
       } else {
         return response;
       }
     })
     .then((response) => response.json())
-    .then((adverts) => {
-      renderPopups(adverts);
-    })
-    .catch(() => {
-      showErrorMessage();
-    });
+    .then(renderPopups)
+    .catch(showErrorMessage);
 };
 
 const sendData = (formData, success, error) => {
   fetch(
-    DATA_PUSH_LINK,
+    MAIN_DIRECTORY + api.get,
     {
       method: 'POST',
       credentials: 'same-origin',
@@ -36,7 +35,7 @@ const sendData = (formData, success, error) => {
     } else {
       error();
     }
-  }).catch(() => error());
+  }).catch(error);
 };
 
 export { getData, sendData };
