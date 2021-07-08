@@ -15,6 +15,7 @@ import { resetMap } from '../map/map.js';
 import { validateAddress } from './form-validate-address.js';
 import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
+import { clearFilter } from '../map/filter.js';
 
 const advertForm = document.querySelector('.ad-form');
 const timein = advertForm.querySelector('#timein');
@@ -43,6 +44,7 @@ const resetForm = () => {
   resetMap();
   syncPricePlaceholderAndMinValue();
   resetValidationMessages();
+  clearFilter();
 };
 
 const submitForm = (evt) => {
@@ -83,4 +85,4 @@ timeout.addEventListener('change', () => {
 
 formSubmitButton.addEventListener('click', submitForm);
 
-export { resetForm };
+export { resetForm, advertForm };
