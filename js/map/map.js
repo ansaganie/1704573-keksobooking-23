@@ -4,6 +4,7 @@ import { address, validateAddress } from '../form/form-validate-address.js';
 import { adverts, getData } from '../api.js';
 import { showServerErrorMessage } from '../utils.js';
 import { doFilter, mapFilters } from './filter.js';
+import { debounce } from '../utils/debounce.js';
 
 const LIMIT_ADVERTS = 10;
 const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -86,6 +87,6 @@ map.on('load', onMapLoad).setView(TOKYO_CENTER, SCALE);
 
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
-mapFilters.addEventListener('change', drawPopups.bind(null, adverts));
+mapFilters.addEventListener('change', debounce(drawPopups.bind(null, adverts)));
 
 export { resetMap, drawPopups };
