@@ -1,12 +1,13 @@
-import { deactivatePage, activatePage} from '../page-state.js';
+import { activateMainForm} from '../page-state.js';
 import { generateCard } from './similar-adverts.js';
 import { address, validateAddress } from '../form/form-validate-address.js';
-import { getData } from '../api.js';
+import { adverts, getData } from '../api.js';
 import { showServerErrorMessage } from '../utils.js';
+import { doFilter, mapFilters } from './filter.js';
 
+const LIMIT_ADVERTS = 10;
 const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
 const MAIN_ICON_HEIGHT = 52;
 const MAIN_ICON_WIDTH = 52;
 const MAIN_ICON_LINK = './img/main-pin.svg';
@@ -18,8 +19,8 @@ const ANCHOR_Y = 52;
 const POPUP_ANCHOR_X = 20;
 const POPUP_ANCHOR_Y = 40;
 const TOKYO_CENTER = {
-  lat: 35.658581,
-  lng: 139.745438,
+  lat: 35.67817,
+  lng: 139.73888,
 };
 const SCALE = 13;
 
@@ -48,8 +49,9 @@ const popupIcon = L.icon({
   iconAnchor: [POPUP_ANCHOR_X, POPUP_ANCHOR_Y],
 });
 
-const drawPopups = (adverts) => {
-  adverts.forEach((advert) => {
+const drawPopups = () => {
+  layer.clearLayers();
+  doFilter(adverts).slice(0, LIMIT_ADVERTS).forEach((advert) => {
     const marker = L.marker(
       advert.location,
       {
@@ -71,16 +73,19 @@ const resetMap = ()=> {
   map.setView(TOKYO_CENTER, SCALE);
 };
 
-deactivatePage();
-map.on('load', activatePage).setView(TOKYO_CENTER, SCALE);
+const onMapLoad = () => {
+  activateMainForm();
+  getData(drawPopups, showServerErrorMessage);
+};
 
 L.tileLayer( MAP_PROVIDER_LINK, {
   attribution: OPEN_STREET_MAP_ATTR,
 }).addTo(map);
 
+map.on('load', onMapLoad).setView(TOKYO_CENTER, SCALE);
+
 mainPinMarker.on('drag', changeAddressValue);
 mainPinMarker.addTo(map);
+mapFilters.addEventListener('change', drawPopups.bind(null, adverts));
 
-getData(drawPopups, showServerErrorMessage);
-
-export { resetMap };
+export { resetMap, drawPopups };
