@@ -1,4 +1,5 @@
 import { resetForm } from './form/form.js';
+import { activateMapFilters } from './page-state.js';
 
 const MAIN_DIRECTORY = 'https://23.javascript.pages.academy/keksobooking';
 const api = {
@@ -6,7 +7,9 @@ const api = {
   get: '/data',
 };
 
-const getData = (renderPopups, showErrorMessage) => {
+let adverts;
+
+const getData = (onSuccess, onError) => {
   fetch(MAIN_DIRECTORY + api.get)
     .then((response) => {
       if (!response.ok) {
@@ -16,13 +19,17 @@ const getData = (renderPopups, showErrorMessage) => {
       }
     })
     .then((response) => response.json())
-    .then(renderPopups)
-    .catch(showErrorMessage);
+    .then((data) => {
+      adverts = data;
+      onSuccess();
+      activateMapFilters();
+    })
+    .catch(onError);
 };
 
-const sendData = (formData, success, error) => {
+const sendData = (formData, onSuccess, onError) => {
   fetch(
-    MAIN_DIRECTORY + api.get,
+    MAIN_DIRECTORY + api.send,
     {
       method: 'POST',
       credentials: 'same-origin',
@@ -31,11 +38,11 @@ const sendData = (formData, success, error) => {
   ).then((response) => {
     if (response.ok) {
       resetForm();
-      success();
+      onSuccess();
     } else {
-      error();
+      onError();
     }
-  }).catch(error);
+  }).catch(onError);
 };
 
-export { getData, sendData };
+export { getData, sendData, adverts };
