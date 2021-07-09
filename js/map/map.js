@@ -1,6 +1,6 @@
 import { activateMainForm} from '../page-state.js';
-import { generateCard } from './similar-adverts.js';
-import { address, validateAddress } from '../form/form-validate-address.js';
+import { generateCard } from './data.js';
+import { address, validateAddress } from '../form/validate-address.js';
 import { adverts, getData } from '../api.js';
 import { showServerErrorMessage } from '../utils.js';
 import { doFilter, mapFilters } from './filter.js';

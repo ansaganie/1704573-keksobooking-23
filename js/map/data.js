@@ -4,7 +4,7 @@ import {
   createRoomAndGuestText,
   updatePropertyOrHide,
   appendChildOrHide
-} from './similar-adverts-utils.js';
+} from './data-utils.js';
 
 const TYPES_IN_RUSSIAN = {
   flat: 'Квартира',
