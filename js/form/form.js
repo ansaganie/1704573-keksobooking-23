@@ -17,6 +17,7 @@ import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
 import { clearFilter } from '../map/filter.js';
 import { debounce } from '../utils/debounce.js';
+import './photos.js';
 
 const advertForm = document.querySelector('.ad-form');
 const timein = advertForm.querySelector('#timein');
