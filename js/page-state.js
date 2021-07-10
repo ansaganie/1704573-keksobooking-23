@@ -1,13 +1,9 @@
-const advertForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
+import { advertForm } from './form/form.js';
+import { mapFilters } from './map/filter.js';
 
 const setDisabled = (disabled, ...elements) => {
   elements.forEach((elem) => (elem.disabled = disabled));
 };
-
-advertForm.classList.add('ad-form--disabled');
-mapFilters.classList.add('ad-form--disabled');
-setDisabled(true, ...advertForm.children, ...mapFilters.children);
 
 const activateMainForm = () => {
   advertForm.classList.remove('ad-form--disabled');

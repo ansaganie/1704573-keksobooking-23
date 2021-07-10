@@ -1,22 +1,24 @@
-import { validateTitle, title } from './form-validate-title.js';
+import { validateTitle, title } from './validate-title.js';
 import {
   price,
   type,
   validatePrice,
   syncPricePlaceholderAndMinValue
-} from './form-validate-price-type.js';
+} from './validate-price-type.js';
 import {
   validateRoomNumberAndCapacity,
   synchronizeRoomNumberAndCapacity,
   capacity,
   roomNumber
-} from './form-validate-room-capacity.js';
+} from './validate-room-capacity.js';
 import { resetMap } from '../map/map.js';
-import { validateAddress } from './form-validate-address.js';
+import { validateAddress } from './validate-address.js';
 import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
 import { clearFilter } from '../map/filter.js';
 import { debounce } from '../utils/debounce.js';
+import './photos.js';
+import { clearFileInputs } from './photos.js';
 
 const advertForm = document.querySelector('.ad-form');
 const timein = advertForm.querySelector('#timein');
@@ -46,6 +48,7 @@ const resetForm = () => {
   syncPricePlaceholderAndMinValue();
   resetValidationMessages();
   clearFilter();
+  clearFileInputs();
 };
 
 const submitForm = (evt) => {
