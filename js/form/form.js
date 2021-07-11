@@ -23,9 +23,9 @@ import { addTimeinTimeoutEventListeners } from './timein-timeout.js';
 const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 const formResetButton = advertForm.querySelector('.ad-form__reset');
+const validationMessages = document.querySelectorAll('.validation-message');
 
 const resetValidationMessages = () => {
-  const validationMessages = document.querySelectorAll('.validation-message');
   validationMessages.forEach((message)=> {
     message.textContent = '';
   });
@@ -48,8 +48,12 @@ const onFormSubmit = (evt) => {
   const isRoomAndCapacityValid = validateRoomNumberAndCapacity();
   const isAddressValid = validateAddress();
 
-  if (isTitleValid && isPriceValid
-     && isRoomAndCapacityValid && isAddressValid) {
+  if (
+    isTitleValid
+    && isPriceValid
+    && isRoomAndCapacityValid
+    && isAddressValid
+  ) {
     sendData(new FormData(advertForm), showSuccessMessage, showErrorMessage);
   }
 };

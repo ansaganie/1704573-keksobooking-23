@@ -1,17 +1,20 @@
-import { isEsc } from '../utils.js';
+import { isEscPressed } from '../utils.js';
 
 const CAPTURE = {
   'once' : true,
 };
 
+const success = document.querySelector('#success');
+const error = document.querySelector('#error');
+
 const destroyElement = (element) => (evt) => {
-  if (element.parentNode && (isEsc(evt.key) || evt.type === 'click')) {
+  if (element.parentNode && (isEscPressed(evt) || evt.type === 'click')) {
     element.parentNode.removeChild(element);
   }
 };
 
 const showSuccessMessage = ()  => {
-  const success = document.querySelector('#success')
+  success
     .content
     .querySelector('.success')
     .cloneNode(true);
@@ -22,7 +25,7 @@ const showSuccessMessage = ()  => {
 };
 
 const showErrorMessage = ()  => {
-  const error = document.querySelector('#error')
+  error
     .content
     .querySelector('.error')
     .cloneNode(true);

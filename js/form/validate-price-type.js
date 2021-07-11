@@ -10,34 +10,34 @@ const TYPE_MIN_PRICE = {
 
 const type = document.querySelector('#type');
 const price = document.querySelector('#price');
+const validationMessage = price.nextElementSibling;
 
 const validatePrice = () => {
   const validity = price.validity;
-  const messageElement = price.nextElementSibling;
 
   if (validity.valueMissing) {
-    messageElement.textContent = 'Это обязательное поле';
+    validationMessage.textContent = 'Это обязательное поле';
     return false;
   }
 
   if (validity.rangeOverflow) {
-    messageElement.textContent = `Максимальная цена ${PRICE_MAX_VALUE}`;
+    validationMessage.textContent = `Максимальная цена ${PRICE_MAX_VALUE}`;
     return false;
   }
 
   if (validity.rangeUnderflow) {
-    messageElement.textContent = `Минимальная цена ${
+    validationMessage.textContent = `Минимальная цена ${
       TYPE_MIN_PRICE[type.value]
     }`;
     return false;
   }
 
   if (NUMBER_PATTERN.test(price.value)) {
-    messageElement.textContent = 'Цена указывается в цифрах';
+    validationMessage.textContent = 'Цена указывается в цифрах';
     return false;
   }
 
-  messageElement.textContent = '';
+  validationMessage.textContent = '';
   return true;
 };
 

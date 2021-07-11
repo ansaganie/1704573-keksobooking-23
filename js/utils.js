@@ -33,10 +33,10 @@ const showServerErrorMessage = (error) => {
   setTimeout(() => errorElement.classList.add('hidden'), ERROR_MESSAGE_SHOW_TIME);
 };
 
-const isEsc = (keyCode) => keyCode === 'Escape';
+const isEscPressed = (evt) => evt.key === 'Escape';
 
 export {
   showServerErrorMessage,
-  isEsc,
+  isEscPressed,
   debounce
 };

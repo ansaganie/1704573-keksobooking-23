@@ -16,7 +16,8 @@ const TYPES_IN_RUSSIAN = {
 
 const cardTemplate = document
   .querySelector('#card')
-  .content.querySelector('.popup');
+  .content
+  .querySelector('.popup');
 
 const generateCard = ({ author, offer }) => {
   const newCard = cardTemplate.cloneNode(true);

@@ -14,17 +14,17 @@ const ROOM_CAPACITY_ERROR_MESSAGE = {
 
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
+const validationMessage = capacity.nextElementSibling;
 
 const validateRoomNumberAndCapacity = () => {
   const roomValue = roomNumber.value;
   const guestValue = capacity.value;
-  const messageElement = capacity.nextElementSibling;
 
   if (!ROOM_AND_CAPACITY[roomValue].includes(guestValue)) {
-    messageElement.textContent = ROOM_CAPACITY_ERROR_MESSAGE[roomValue];
+    validationMessage.textContent = ROOM_CAPACITY_ERROR_MESSAGE[roomValue];
     return false;
   } else {
-    messageElement.textContent = '';
+    validationMessage.textContent = '';
     return true;
   }
 };
