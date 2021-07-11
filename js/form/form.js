@@ -24,15 +24,6 @@ const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 const formResetButton = advertForm.querySelector('.ad-form__reset');
 
-const callAndAddInputListener = (elem, func) => {
-  const callback = () => {
-    func();
-    elem.addEventListener('input', debounce(func));
-  };
-
-  return callback;
-};
-
 const resetValidationMessages = () => {
   const validationMessages = document.querySelectorAll('.validation-message');
   validationMessages.forEach((message)=> {
@@ -64,21 +55,21 @@ const submitForm = (evt) => {
 };
 
 synchronizeRoomNumberAndCapacity();
+addTimeinTimeoutEventListeners();
+addImageInputEventListeners();
 
 capacity.addEventListener('change', validateRoomNumberAndCapacity);
 
 roomNumber.addEventListener('change', synchronizeRoomNumberAndCapacity);
 
-title.addEventListener('blur', callAndAddInputListener(title, validateTitle));
+title.addEventListener('input', debounce(validateTitle));
 
-price.addEventListener('blur', callAndAddInputListener(price, validatePrice));
+price.addEventListener('input', debounce(validatePrice));
 
 type.addEventListener('change', syncPricePlaceholderAndMinValue);
 
-addTimeinTimeoutEventListeners();
-addImageInputEventListeners();
-
 formSubmitButton.addEventListener('click', submitForm);
+
 formResetButton.addEventListener('click', resetForm);
 
 export { resetForm, advertForm };
