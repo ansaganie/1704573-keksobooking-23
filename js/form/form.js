@@ -17,12 +17,10 @@ import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
 import { clearFilter } from '../map/filter.js';
 import { debounce } from '../utils.js';
-import { clearFileInputs } from './photos.js';
-import './photos.js';
+import { clearFileInputs, addImageInputEventListeners } from './photos.js';
+import { addTimeinTimeoutEventListeners } from './timein-timeout.js';
 
 const advertForm = document.querySelector('.ad-form');
-const timein = advertForm.querySelector('#timein');
-const timeout = advertForm.querySelector('#timeout');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
 const formResetButton = advertForm.querySelector('.ad-form__reset');
 
@@ -67,8 +65,6 @@ const submitForm = (evt) => {
 
 synchronizeRoomNumberAndCapacity();
 
-formResetButton.addEventListener('click', resetForm);
-
 capacity.addEventListener('change', validateRoomNumberAndCapacity);
 
 roomNumber.addEventListener('change', synchronizeRoomNumberAndCapacity);
@@ -79,14 +75,10 @@ price.addEventListener('blur', callAndAddInputListener(price, validatePrice));
 
 type.addEventListener('change', syncPricePlaceholderAndMinValue);
 
-timein.addEventListener('change', () => {
-  timeout.value = timein.value;
-});
-
-timeout.addEventListener('change', () => {
-  timein.value = timeout.value;
-});
+addTimeinTimeoutEventListeners();
+addImageInputEventListeners();
 
 formSubmitButton.addEventListener('click', submitForm);
+formResetButton.addEventListener('click', resetForm);
 
 export { resetForm, advertForm };

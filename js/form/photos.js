@@ -1,18 +1,19 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const AVATAR_IMG = document.createElement('img');
-AVATAR_IMG.width = 40;
-AVATAR_IMG.height = 44;
-AVATAR_IMG.alt = 'Аватар пользователя';
-AVATAR_IMG.src = 'img/muffin-grey.svg';
+const avatarImg = document.createElement('img');
+avatarImg.width = 40;
+avatarImg.height = 44;
+avatarImg.alt = 'Аватар пользователя';
+avatarImg.src = 'img/muffin-grey.svg';
 const MAX_AVATAR_PHOTOS = 3;
 const avatar = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview');
 
-const ROOM_IMG = document.createElement('img');
-ROOM_IMG.classList.add('ad-form__photo');
-ROOM_IMG.width = 70;
-ROOM_IMG.height = 70;
-ROOM_IMG.alt = 'Фотография помещения';
+const roomImg = document.createElement('img');
+roomImg.classList.add('ad-form__photo');
+roomImg.width = 70;
+roomImg.height = 70;
+roomImg.alt = 'Фотография помещения';
+
 const MAX_ROOM_PHOTOS = 3;
 const roomPhotos = document.querySelector('#images');
 const roomPhotosPreview = document.querySelector('.ad-form__photos-preview');
@@ -53,17 +54,29 @@ const clearFileInputs = () => {
 
   avatar.value = '';
   avatarPreview.innerHTML = '';
-  avatarPreview.appendChild(AVATAR_IMG);
+  avatarPreview.appendChild(avatarImg);
 };
 
-avatar.addEventListener(
-  'change',
-  previewLoader.bind(null, avatar, avatarPreview, MAX_AVATAR_PHOTOS, AVATAR_IMG),
-);
+const addImageInputEventListeners = () => {
+  avatar.addEventListener(
+    'change',
+    previewLoader.bind(
+      null,
+      avatar,
+      avatarPreview,
+      MAX_AVATAR_PHOTOS,
+      avatarImg),
+  );
 
-roomPhotos.addEventListener(
-  'change',
-  previewLoader.bind(null, roomPhotos, roomPhotosPreview, MAX_ROOM_PHOTOS, ROOM_IMG),
-);
+  roomPhotos.addEventListener(
+    'change',
+    previewLoader.bind(
+      null,
+      roomPhotos,
+      roomPhotosPreview,
+      MAX_ROOM_PHOTOS,
+      roomImg),
+  );
+};
 
-export { clearFileInputs };
+export { clearFileInputs, addImageInputEventListeners };
