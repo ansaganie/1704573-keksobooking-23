@@ -4,39 +4,45 @@ const CAPTURE = {
   'once' : true,
 };
 
-const success = document.querySelector('#success');
-const error = document.querySelector('#error');
+const success = document.querySelector('#success')
+  .content
+  .querySelector('.success');
 
-const destroyElement = (element) => (evt) => {
-  if (element.parentNode && (isEscPressed(evt) || evt.type === 'click')) {
+const error = document.querySelector('#error')
+  .content
+  .querySelector('.error');
+
+const onSuccessOrErrorClick = (element) => () => {
+  if (element.parentNode) {
     element.parentNode.removeChild(element);
   }
 };
 
-const showSuccessMessage = ()  => {
-  success
-    .content
-    .querySelector('.success')
-    .cloneNode(true);
-  success.addEventListener('click', destroyElement(success), CAPTURE);
-  document.addEventListener('keydown', destroyElement(success), CAPTURE);
+const onSuccessOrErrorKeydown = (element) => (evt) => {
+  if (element.parentNode && isEscPressed(evt)) {
+    element.parentNode.removeChild(element);
+  }
+};
 
-  document.body.appendChild(success);
+
+const showSuccessMessage = ()  => {
+  const successClone = success.cloneNode(true);
+
+  successClone.addEventListener('click', onSuccessOrErrorClick(successClone), CAPTURE);
+  document.addEventListener('keydown', onSuccessOrErrorKeydown(successClone), CAPTURE);
+
+  document.body.appendChild(successClone);
 };
 
 const showErrorMessage = ()  => {
-  error
-    .content
-    .querySelector('.error')
-    .cloneNode(true);
+  const errorClone = error.cloneNode(true);
+  const errorButton = errorClone.querySelector('.error__button');
 
-  const errorButton = error.querySelector('.error__button');
+  errorClone.addEventListener('click', onSuccessOrErrorClick(errorClone), CAPTURE);
+  errorButton.addEventListener('click', onSuccessOrErrorClick(errorClone), CAPTURE);
+  document.addEventListener('keydown', onSuccessOrErrorKeydown(errorClone), CAPTURE);
 
-  error.addEventListener('click', destroyElement(error), CAPTURE);
-  errorButton.addEventListener('click', destroyElement(error), CAPTURE);
-  document.addEventListener('keydown', destroyElement(error), CAPTURE);
-
-  document.body.appendChild(error);
+  document.body.appendChild(errorClone);
 };
 
 export {
