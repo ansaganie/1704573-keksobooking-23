@@ -31,7 +31,7 @@ const resetValidationMessages = () => {
   });
 };
 
-const resetForm = () => {
+const onResetButtonClick = () => {
   advertForm.reset();
   resetMap();
   syncPricePlaceholderAndMinValue();
@@ -40,7 +40,7 @@ const resetForm = () => {
   clearFileInputs();
 };
 
-const submitForm = (evt) => {
+const onFormSubmit = (evt) => {
   evt.preventDefault();
 
   const isTitleValid = validateTitle();
@@ -68,8 +68,8 @@ price.addEventListener('input', debounce(validatePrice));
 
 type.addEventListener('change', syncPricePlaceholderAndMinValue);
 
-formSubmitButton.addEventListener('click', submitForm);
+formSubmitButton.addEventListener('click', onFormSubmit);
 
-formResetButton.addEventListener('click', resetForm);
+formResetButton.addEventListener('click', onResetButtonClick);
 
-export { resetForm, advertForm };
+export { onResetButtonClick as resetForm, advertForm };

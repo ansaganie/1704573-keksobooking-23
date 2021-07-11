@@ -63,7 +63,7 @@ const drawPopups = () => {
   });
 };
 
-const changeAddressValue = ({ target }) => {
+const onMainPinDrag = ({ target }) => {
   const latlng = target.getLatLng();
   address.value = `${latlng.lat.toFixed(5)} ${latlng.lng.toFixed(5)}`;
   validateAddress();
@@ -85,7 +85,7 @@ L.tileLayer( MAP_PROVIDER_LINK, {
 
 map.on('load', onMapLoad).setView(TOKYO_CENTER, SCALE);
 
-mainPinMarker.on('drag', changeAddressValue);
+mainPinMarker.on('drag', onMainPinDrag);
 mainPinMarker.addTo(map);
 mapFilters.addEventListener('change', debounce(drawPopups.bind(null, adverts)));
 

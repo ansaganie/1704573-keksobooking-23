@@ -1,19 +1,19 @@
 import { drawPopups } from './map.js';
 import { adverts } from '../api.js';
 
+const priceFilters = {
+  'any' : () => true,
+  'low' : (priceGiven) => priceGiven < 10000 && priceGiven >= 0,
+  'middle' : (priceGiven) => priceGiven >= 10000 && priceGiven < 50000,
+  'high' : (priceGiven) => priceGiven >= 50000,
+};
+
 const mapFilters = document.querySelector('.map__filters');
 const type = mapFilters.querySelector('#housing-type');
 const price = mapFilters.querySelector('#housing-price');
 const rooms = mapFilters.querySelector('#housing-rooms');
 const guests = mapFilters.querySelector('#housing-guests');
 const features = mapFilters.querySelector('#housing-features');
-
-const priceFilter = {
-  'any' : () => true,
-  'low' : (priceGiven) => priceGiven < 10000 && priceGiven >= 0,
-  'middle' : (priceGiven) => priceGiven >= 10000 && priceGiven < 50000,
-  'high' : (priceGiven) => priceGiven >= 50000,
-};
 
 const retrieveFeaturesNames = (array) => {
   const result = [];
@@ -35,7 +35,7 @@ const doFilter = (data) => {
         return false;
       }
 
-      if (!priceFilter[price.value](offer.price)) {
+      if (!priceFilters[price.value](offer.price)) {
         return false;
       }
 

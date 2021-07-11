@@ -1,5 +1,6 @@
 const TITLE_MIN_LENGTH = 30;
 const TITLE_MAX_LENGTH = 100;
+
 const title = document.querySelector('#title');
 
 const validateTitle = () => {

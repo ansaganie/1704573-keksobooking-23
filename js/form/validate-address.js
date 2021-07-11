@@ -1,5 +1,5 @@
-
 const ADDERSS_PATTERN = /^([0-9]+\.?[0-9]*|\.[0-9]+) ([0-9]+\.?[0-9]*|\.[0-9]+)$/;
+
 const address = document.querySelector('#address');
 
 const validateAddress = () => {

@@ -1,6 +1,3 @@
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
-
 const ROOM_AND_CAPACITY = {
   1: ['1'],
   2: ['1', '2'],
@@ -14,6 +11,9 @@ const ROOM_CAPACITY_ERROR_MESSAGE = {
   3: '3 комнаты = 1, 2 или 3 гостей',
   100: '100 комнат не для гостей',
 };
+
+const roomNumber = document.querySelector('#room_number');
+const capacity = document.querySelector('#capacity');
 
 const validateRoomNumberAndCapacity = () => {
   const roomValue = roomNumber.value;
