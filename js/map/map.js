@@ -27,7 +27,13 @@ const SCALE = 13;
 
 const mapContainer = document.querySelector('#map-canvas');
 
-const map = L.map(mapContainer);
+const map = L.map(
+  mapContainer,
+  {
+    scrollWheelZoom: false,
+  },
+);
+
 const layer = L.layerGroup().addTo(map);
 
 const mainPinIcon = L.icon({
