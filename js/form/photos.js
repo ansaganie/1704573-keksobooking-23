@@ -1,10 +1,14 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const MAX_AVATAR_PHOTOS = 3;
 const MAX_ROOM_PHOTOS = 3;
+const AVATAR_IMG_WIDTH = 40;
+const AVATAR_IMG_HEIGHT = 44;
+const ROOM_IMG_WIDTH = 70;
+const ROOM_IMG_HEIGHT = 70;
 
 const avatarImg = document.createElement('img');
-avatarImg.width = 40;
-avatarImg.height = 44;
+avatarImg.width = AVATAR_IMG_WIDTH;
+avatarImg.height = AVATAR_IMG_HEIGHT;
 avatarImg.alt = 'Аватар пользователя';
 avatarImg.src = 'img/muffin-grey.svg';
 const avatar = document.querySelector('#avatar');
@@ -12,8 +16,8 @@ const avatarPreview = document.querySelector('.ad-form-header__preview');
 
 const roomImg = document.createElement('img');
 roomImg.classList.add('ad-form__photo');
-roomImg.width = 70;
-roomImg.height = 70;
+roomImg.width = ROOM_IMG_WIDTH;
+roomImg.height = ROOM_IMG_HEIGHT;
 roomImg.alt = 'Фотография помещения';
 
 const roomPhotos = document.querySelector('#images');
