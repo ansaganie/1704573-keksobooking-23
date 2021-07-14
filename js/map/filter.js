@@ -17,61 +17,77 @@ const type = mapFilters.querySelector('#housing-type');
 const price = mapFilters.querySelector('#housing-price');
 const rooms = mapFilters.querySelector('#housing-rooms');
 const guests = mapFilters.querySelector('#housing-guests');
-const features = mapFilters.querySelector('#housing-features');
+const features = Array.from(mapFilters.querySelectorAll('input[name=features]'));
 
-const retrieveFeaturesNames = (inputs) => {
-  const result = [];
-  for (const elem of inputs) {
-    if (elem.checked) {
-      result.push(elem.value);
-    }
+const filterSelectedFeatures = (inputs) => inputs.filter((input) => input.checked);
+
+const filterType = (offer, selectedType) => {
+  if (offer.type !== selectedType && selectedType !== 'any') {
+    throw new Error();
   }
-
-  return result;
 };
 
-const doFilter = (data) => data
-  .filter((advert) => {
-    const offer = advert.offer;
+const filterPrice = (offer, selectedPrice) => {
+  if (!priceFilters[selectedPrice](offer.price)) {
+    throw new Error();
+  }
+};
 
-    if (offer.type !== type.value && type.value !== 'any') {
-      return false;
+const filterRooms = (offer, selectedRooms) => {
+  if (
+    offer.rooms !== undefined
+    && offer.rooms !== +selectedRooms
+    && selectedRooms !== 'any'
+  ) {
+    throw new Error();
+  }
+};
+
+const filterGuests = (offer, selectedGuests) => {
+  if (
+    offer.guests !== undefined
+    && offer.guests !== +selectedGuests
+    && selectedGuests !== 'any'
+  ) {
+    throw new Error();
+  }
+};
+
+const filterFeatures = (offer, featureValues) => {
+  if (featureValues.length > 0 && offer.features === undefined) {
+    throw new Error();
+  }
+
+  featureValues.forEach((elem) => {
+    if (!offer.features.includes(elem.value)) {
+      throw new Error();
     }
+  });
+};
 
-    if (!priceFilters[price.value](offer.price)) {
-      return false;
-    }
+const doFilter = (data) => {
+  const selectedFeatures = filterSelectedFeatures(features);
+  const selectedType = type.value;
+  const selectedPrice = price.value;
+  const selectedRooms = rooms.value;
+  const selectedGuests = guests.value;
 
-    if (
-      offer.rooms !== undefined
-      && offer.rooms !== +rooms.value
-      && rooms.value !== 'any'
-    ) {
-      return false;
-    }
-
-    if (
-      offer.guests !== undefined
-      && offer.guests !== +guests.value
-      && guests.value !== 'any'
-    ) {
-      return false;
-    }
-
-    const featuresNames = retrieveFeaturesNames(features.children);
-
-    if (featuresNames.length > 0 && offer.features === undefined) {
-      return false;
-    }
-
-    for (const elem of featuresNames) {
-      if (!offer.features.includes(elem)) {
+  return data
+    .filter((advert) => {
+      const offer = advert.offer;
+      try {
+        filterType(offer, selectedType);
+        filterPrice(offer, selectedPrice);
+        filterRooms(offer, selectedRooms);
+        filterGuests(offer, selectedGuests);
+        filterFeatures(offer, selectedFeatures);
+      } catch (err) {
         return false;
       }
-    }
 
-    return true;
-  });
+      return true;
+    });
+};
 
 const clearFilter = () => {
   mapFilters.reset();
