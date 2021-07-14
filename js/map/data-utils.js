@@ -1,10 +1,10 @@
 /**
- * Creates <li> elements of corresponiding features from 'featuresList' array
- * @param {array} featureList list of strings
+ * Creates <li> elements of corresponiding features from 'features' array
+ * @param {array} features list of strings
  * @returns {DocumentFragment}
  */
-const createFeaturesList = (featuresList) => {
-  if (!featuresList) {
+const createFeaturesList = (features) => {
+  if (!features) {
     return null;
   }
 
@@ -13,7 +13,7 @@ const createFeaturesList = (featuresList) => {
   const listElem = document.createElement('li');
   listElem.classList.add('popup__feature');
 
-  featuresList.forEach((element) => {
+  features.forEach((element) => {
     const newListElem = listElem.cloneNode(true);
     newListElem.classList.add(`popup__feature--${element}`);
     bucket.append(newListElem);
@@ -25,17 +25,19 @@ const createFeaturesList = (featuresList) => {
 /**
  * Generates list of <img> elements with corresponding 'src' value retrived from
  * the imput array 'photosList'
- * @param {array} photosList list of strings with images 'src'
- * @param {HTMLElement} imgElement template of <img> element
+ * @param {array} photos list of strings with images 'src'
+ * @param {HTMLElement} img template of <img> element
  * @returns {DocumentFragment}
  */
-const createPhotosList = (photosList, imgElement) => {
-  if (!photosList) {
+const createPhotosList = (photos, img) => {
+  if (!photos) {
     return null;
   }
+
   const bucket = document.createDocumentFragment();
-  photosList.forEach((elem) => {
-    const newImg = imgElement.cloneNode(true);
+
+  photos.forEach((elem) => {
+    const newImg = img.cloneNode(true);
     newImg.src = elem;
     bucket.append(newImg);
   });
@@ -53,9 +55,8 @@ const createPhotosList = (photosList, imgElement) => {
 const createRoomAndGuestText = (rooms, guests) => {
   const roomsText = rooms === 1 ? '1 комната' : `${rooms} комнаты`;
   const guestsText = guests === 0 ? 'не для' : `для ${guests}`;
-  return `${roomsText} ${guestsText} ${
-    guestsText.endsWith('1') ? 'гостя' : 'гостей'
-  }`;
+
+  return `${roomsText} ${guestsText} ${guestsText.endsWith('1') ? 'гостя' : 'гостей'}`;
 };
 
 /**
@@ -82,10 +83,10 @@ const updatePropertyOrHide = (element, propertyName, text) => {
 const appendChildOrHide = (element, fragment) => {
   if (fragment === null) {
     element.classList.add('hidden');
-    return;
+  } else {
+    element.innerHTML = '';
+    element.appendChild(fragment);
   }
-  element.innerHTML = '';
-  element.appendChild(fragment);
 };
 
 export {
