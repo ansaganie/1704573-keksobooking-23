@@ -1,24 +1,24 @@
-import { validateTitle, title } from './validate-title.js';
+import { onTitleInput, title } from './validate-title.js';
 import {
   price,
   type,
-  validatePrice,
-  syncPricePlaceholderAndMinValue
+  onPriceInput,
+  onTypeChange
 } from './validate-price-type.js';
 import {
-  validateRoomNumberAndCapacity,
-  synchronizeRoomNumberAndCapacity,
+  onCapacityChange,
+  onRoomNumberChange,
   capacity,
   roomNumber
 } from './validate-room-capacity.js';
 import { resetMap } from '../map/map.js';
-import { validateAddress } from './validate-address.js';
+import { onAddressChange } from './validate-address.js';
 import { showErrorMessage, showSuccessMessage } from './success-error.js';
 import { sendData } from '../api.js';
 import { clearFilter } from '../map/filter.js';
 import { debounce } from '../utils.js';
 import { clearFileInputs, addImageInputEventListeners } from './photos.js';
-import { addTimeinTimeoutEventListeners } from './timein-timeout.js';
+import './timein-timeout.js';
 
 const advertForm = document.querySelector('.ad-form');
 const formSubmitButton = advertForm.querySelector('.ad-form__submit');
@@ -34,7 +34,7 @@ const resetValidationMessages = () => {
 const onResetButtonClick = () => {
   advertForm.reset();
   resetMap();
-  syncPricePlaceholderAndMinValue();
+  onTypeChange();
   resetValidationMessages();
   clearFilter();
   clearFileInputs();
@@ -43,10 +43,10 @@ const onResetButtonClick = () => {
 const onFormSubmit = (evt) => {
   evt.preventDefault();
 
-  const isTitleValid = validateTitle();
-  const isPriceValid = validatePrice();
-  const isRoomAndCapacityValid = validateRoomNumberAndCapacity();
-  const isAddressValid = validateAddress();
+  const isTitleValid = onTitleInput();
+  const isPriceValid = onPriceInput();
+  const isRoomAndCapacityValid = onCapacityChange();
+  const isAddressValid = onAddressChange();
 
   if (
     isTitleValid
@@ -58,19 +58,18 @@ const onFormSubmit = (evt) => {
   }
 };
 
-synchronizeRoomNumberAndCapacity();
-addTimeinTimeoutEventListeners();
+onRoomNumberChange();
 addImageInputEventListeners();
 
-capacity.addEventListener('change', validateRoomNumberAndCapacity);
+capacity.addEventListener('change', onCapacityChange);
 
-roomNumber.addEventListener('change', synchronizeRoomNumberAndCapacity);
+roomNumber.addEventListener('change', onRoomNumberChange);
 
-title.addEventListener('input', debounce(validateTitle));
+title.addEventListener('input', debounce(onTitleInput));
 
-price.addEventListener('input', debounce(validatePrice));
+price.addEventListener('input', debounce(onPriceInput));
 
-type.addEventListener('change', syncPricePlaceholderAndMinValue);
+type.addEventListener('change', onTypeChange);
 
 formSubmitButton.addEventListener('click', onFormSubmit);
 

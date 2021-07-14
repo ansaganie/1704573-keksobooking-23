@@ -12,7 +12,7 @@ const type = document.querySelector('#type');
 const price = document.querySelector('#price');
 const validationMessage = price.nextElementSibling;
 
-const validatePrice = () => {
+const onPriceInput = () => {
   const validity = price.validity;
 
   if (validity.valueMissing) {
@@ -41,7 +41,7 @@ const validatePrice = () => {
   return true;
 };
 
-const syncPricePlaceholderAndMinValue = () => {
+const onTypeChange = () => {
   price.placeholder = TYPE_MIN_PRICE[type.value];
   price.min = TYPE_MIN_PRICE[type.value];
 };
@@ -49,6 +49,6 @@ const syncPricePlaceholderAndMinValue = () => {
 export {
   price,
   type,
-  validatePrice,
-  syncPricePlaceholderAndMinValue
+  onPriceInput,
+  onTypeChange
 };

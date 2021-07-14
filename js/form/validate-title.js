@@ -4,7 +4,7 @@ const TITLE_MAX_LENGTH = 100;
 const title = document.querySelector('#title');
 const validationMessage = title.nextElementSibling;
 
-const validateTitle = () => {
+const onTitleInput = () => {
   const validity = title.validity;
   const length = title.value.length;
 
@@ -32,4 +32,4 @@ const validateTitle = () => {
   return true;
 };
 
-export { title, validateTitle };
+export { title, onTitleInput };

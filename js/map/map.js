@@ -1,6 +1,6 @@
 import { activateMainForm} from '../page-state.js';
 import { generateCard } from './data.js';
-import { address, validateAddress } from '../form/validate-address.js';
+import { address, onAddressChange } from '../form/validate-address.js';
 import { adverts, getData } from '../api.js';
 import { showServerErrorMessage } from '../utils.js';
 import { doFilter, mapFilters } from './filter.js';
@@ -66,7 +66,7 @@ const drawPopups = () => {
 const onMainPinDrag = ({ target }) => {
   const latlng = target.getLatLng();
   address.value = `${latlng.lat.toFixed(5)} ${latlng.lng.toFixed(5)}`;
-  validateAddress();
+  onAddressChange();
 };
 
 const resetMap = ()=> {
@@ -79,6 +79,8 @@ const onMapLoad = () => {
   getData(drawPopups, showServerErrorMessage);
 };
 
+const onMapFilterChange = () => drawPopups(adverts);
+
 L.tileLayer( MAP_PROVIDER_LINK, {
   attribution: OPEN_STREET_MAP_ATTR,
 }).addTo(map);
@@ -87,6 +89,6 @@ map.on('load', onMapLoad).setView(TOKYO_CENTER, SCALE);
 
 mainPinMarker.on('drag', onMainPinDrag);
 mainPinMarker.addTo(map);
-mapFilters.addEventListener('change', debounce(drawPopups.bind(null, adverts)));
+mapFilters.addEventListener('change', debounce(onMapFilterChange));
 
 export { resetMap, drawPopups };

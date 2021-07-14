@@ -32,10 +32,12 @@ const previewLoader = (photoInput, photoPreview, maxLength, img) => {
     if (matches) {
       const reader = new FileReader();
 
-      reader.addEventListener('load', () => {
+      const onImageLoad = () => {
         imgClone.src = reader.result;
         photoPreview.appendChild(imgClone);
-      });
+      };
+
+      reader.addEventListener('load', onImageLoad);
 
       reader.readAsDataURL(file);
     }
@@ -54,26 +56,25 @@ const clearFileInputs = () => {
   avatarPreview.appendChild(avatarImg);
 };
 
-const addImageInputEventListeners = () => {
-  avatar.addEventListener(
-    'change',
-    previewLoader.bind(
-      null,
-      avatar,
-      avatarPreview,
-      MAX_AVATAR_PHOTOS,
-      avatarImg),
-  );
+const onAvatarChange = () => {
+  previewLoader(
+    avatar,
+    avatarPreview,
+    MAX_AVATAR_PHOTOS,
+    avatarImg);
+};
 
-  roomPhotos.addEventListener(
-    'change',
-    previewLoader.bind(
-      null,
-      roomPhotos,
-      roomPhotosPreview,
-      MAX_ROOM_PHOTOS,
-      roomImg),
-  );
+const onRoomPhotosChange = () => {
+  previewLoader(
+    roomPhotos,
+    roomPhotosPreview,
+    MAX_ROOM_PHOTOS,
+    roomImg);
+};
+
+const addImageInputEventListeners = () => {
+  avatar.addEventListener('change', onAvatarChange);
+  roomPhotos.addEventListener('change', onRoomPhotosChange);
 };
 
 export { clearFileInputs, addImageInputEventListeners };

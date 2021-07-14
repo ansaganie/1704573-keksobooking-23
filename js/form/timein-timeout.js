@@ -1,14 +1,14 @@
 const timein = document.querySelector('#timein');
 const timeout = document.querySelector('#timeout');
 
-const addTimeinTimeoutEventListeners = () => {
-  timein.addEventListener('change', () => {
-    timeout.value = timein.value;
-  });
-
-  timeout.addEventListener('change', () => {
-    timein.value = timeout.value;
-  });
+const onTimeInChange = () => {
+  timeout.value = timein.value;
 };
 
-export { addTimeinTimeoutEventListeners };
+const onTimeOutChange = () => {
+  timein.value = timeout.value;
+};
+
+timein.addEventListener('change', onTimeInChange);
+timeout.addEventListener('change', onTimeOutChange);
+

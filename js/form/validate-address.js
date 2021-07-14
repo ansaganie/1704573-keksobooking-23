@@ -3,7 +3,7 @@ const ADDERSS_PATTERN = /^([0-9]+\.?[0-9]*|\.[0-9]+) ([0-9]+\.?[0-9]*|\.[0-9]+)$
 const address = document.querySelector('#address');
 const validationMessage = address.nextElementSibling;
 
-const validateAddress = () => {
+const onAddressChange = () => {
 
   if (!ADDERSS_PATTERN.test(address.value)) {
     validationMessage.textContent = 'Неправильный формат адреса';
@@ -13,4 +13,4 @@ const validateAddress = () => {
   return true;
 };
 
-export { address, validateAddress };
+export { address, onAddressChange };

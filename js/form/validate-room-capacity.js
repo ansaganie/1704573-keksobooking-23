@@ -16,7 +16,7 @@ const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const validationMessage = capacity.nextElementSibling;
 
-const validateRoomNumberAndCapacity = () => {
+const onCapacityChange = () => {
   const roomValue = roomNumber.value;
   const guestValue = capacity.value;
 
@@ -29,7 +29,7 @@ const validateRoomNumberAndCapacity = () => {
   }
 };
 
-const synchronizeRoomNumberAndCapacity = () => {
+const onRoomNumberChange = () => {
   for (const option of capacity.children) {
     if (!ROOM_AND_CAPACITY[roomNumber.value].includes(option.value)) {
       option.disabled = true;
@@ -39,12 +39,12 @@ const synchronizeRoomNumberAndCapacity = () => {
     }
   }
 
-  validateRoomNumberAndCapacity();
+  onCapacityChange();
 };
 
 export {
-  validateRoomNumberAndCapacity,
-  synchronizeRoomNumberAndCapacity,
+  onCapacityChange,
+  onRoomNumberChange,
   capacity,
   roomNumber
 };
