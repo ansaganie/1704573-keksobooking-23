@@ -25,8 +25,8 @@ const roomPhotosPreview = document.querySelector('.ad-form__photos-preview');
 
 const previewLoader = (photoInput, photoPreview, maxLength, img) => {
   photoPreview.innerHTML = '';
-
-  for (let iterator = 0; iterator < Math.min(photoInput.files.length, maxLength); iterator++) {
+  const length = Math.min(photoInput.files.length, maxLength);
+  for (let iterator = 0; iterator < length; iterator++) {
     const file = photoInput.files[iterator];
     const fileName = file.name.toLowerCase();
     const imgClone = img.cloneNode(true);
