@@ -25,7 +25,7 @@ const generateCard = ({ author, offer }) => {
   newCard.querySelector('.popup__title').textContent = offer.title;
   newCard.querySelector(
     '.popup__text--price',
-  ).innerHTML = `${offer.price} <span>₽/ночь</span>`;
+  ).textContent = `${offer.price} <span>₽/ночь</span>`;
 
   updatePropertyOrHide(
     newCard.querySelector('.popup__text--address'),
