@@ -23,7 +23,7 @@ roomImg.alt = 'Фотография помещения';
 const roomPhotos = document.querySelector('#images');
 const roomPhotosPreview = document.querySelector('.ad-form__photos-preview');
 
-const previewLoader = (photoInput, photoPreview, maxLength, img) => {
+const createImagePreview = (photoInput, photoPreview, maxLength, img) => {
   photoPreview.innerHTML = '';
   const length = Math.min(photoInput.files.length, maxLength);
   for (let iterator = 0; iterator < length; iterator++) {
@@ -61,7 +61,7 @@ const clearFileInputs = () => {
 };
 
 const onAvatarChange = () => {
-  previewLoader(
+  createImagePreview(
     avatar,
     avatarPreview,
     MAX_AVATAR_PHOTOS,
@@ -69,7 +69,7 @@ const onAvatarChange = () => {
 };
 
 const onRoomPhotosChange = () => {
-  previewLoader(
+  createImagePreview(
     roomPhotos,
     roomPhotosPreview,
     MAX_ROOM_PHOTOS,
