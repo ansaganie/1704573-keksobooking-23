@@ -7,6 +7,7 @@ import { doFilter, mapFilters } from './filter.js';
 import { debounce } from '../utils.js';
 
 const LIMIT_ADVERTS = 10;
+const COORDINATE_PRECISION = 5;
 const MAP_PROVIDER_LINK = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OPEN_STREET_MAP_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const MAIN_ICON_HEIGHT = 52;
@@ -71,7 +72,7 @@ const drawPopups = () => {
 
 const onMainPinDrag = ({ target }) => {
   const latlng = target.getLatLng();
-  address.value = `${latlng.lat.toFixed(5)} ${latlng.lng.toFixed(5)}`;
+  address.value = `${latlng.lat.toFixed(COORDINATE_PRECISION)} ${latlng.lng.toFixed(COORDINATE_PRECISION)}`;
   onAddressChange();
 };
 

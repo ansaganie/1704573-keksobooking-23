@@ -49,10 +49,10 @@ const onFormSubmit = (evt) => {
   const isAddressValid = onAddressChange();
 
   if (
-    isTitleValid
-    && isPriceValid
-    && isRoomAndCapacityValid
-    && isAddressValid
+    isTitleValid &&
+    isPriceValid &&
+    isRoomAndCapacityValid &&
+    isAddressValid
   ) {
     sendData(new FormData(advertForm), showSuccessMessage, showErrorMessage);
   }

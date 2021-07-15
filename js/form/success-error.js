@@ -12,35 +12,41 @@ const error = document.querySelector('#error')
   .content
   .querySelector('.error');
 
-const onSuccessOrErrorClick = (element) => () => {
-  if (element.parentNode) {
-    element.parentNode.removeChild(element);
-  }
-};
-
 const onSuccessOrErrorKeydown = (element) => (evt) => {
   if (element.parentNode && isEscPressed(evt)) {
     element.parentNode.removeChild(element);
   }
 };
 
+const onSuccessOrErrorClick = (element, listener) => () => {
+  if (element.parentNode) {
+    element.parentNode.removeChild(element);
+  }
+
+  document.removeEventListener('keydown', listener);
+};
 
 const showSuccessMessage = ()  => {
   const successClone = success.cloneNode(true);
+  const onSuccessKeydown = onSuccessOrErrorKeydown(successClone);
+  successClone.addEventListener(
+    'click',
+    onSuccessOrErrorClick(successClone, onSuccessKeydown),
+  );
 
-  successClone.addEventListener('click', onSuccessOrErrorClick(successClone), CAPTURE);
-  document.addEventListener('keydown', onSuccessOrErrorKeydown(successClone), CAPTURE);
-
+  document.addEventListener('keydown', onSuccessKeydown, CAPTURE);
   document.body.appendChild(successClone);
 };
 
 const showErrorMessage = ()  => {
   const errorClone = error.cloneNode(true);
-  const errorButton = errorClone.querySelector('.error__button');
+  const onErrorKeydown = onSuccessOrErrorKeydown(errorClone);
+  errorClone.addEventListener(
+    'click',
+    onSuccessOrErrorClick(errorClone, onErrorKeydown),
+  );
 
-  errorClone.addEventListener('click', onSuccessOrErrorClick(errorClone), CAPTURE);
-  errorButton.addEventListener('click', onSuccessOrErrorClick(errorClone), CAPTURE);
-  document.addEventListener('keydown', onSuccessOrErrorKeydown(errorClone), CAPTURE);
+  document.addEventListener('keydown', onErrorKeydown, CAPTURE);
 
   document.body.appendChild(errorClone);
 };

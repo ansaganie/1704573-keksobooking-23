@@ -19,7 +19,9 @@ const rooms = mapFilters.querySelector('#housing-rooms');
 const guests = mapFilters.querySelector('#housing-guests');
 const features = Array.from(mapFilters.querySelectorAll('input[name=features]'));
 
-const filterSelectedFeatures = (inputs) => inputs.filter((input) => input.checked);
+const filterSelectedFeatures = (inputs) => inputs.filter(
+  (input) => input.checked,
+);
 
 const filterType = (offer, selectedType) => {
   if (offer.type !== selectedType && selectedType !== 'any') {
@@ -35,9 +37,9 @@ const filterPrice = (offer, selectedPrice) => {
 
 const filterRooms = (offer, selectedRooms) => {
   if (
-    offer.rooms !== undefined
-    && offer.rooms !== +selectedRooms
-    && selectedRooms !== 'any'
+    offer.rooms !== undefined &&
+    offer.rooms !== +selectedRooms &&
+    selectedRooms !== 'any'
   ) {
     throw new Error();
   }
@@ -45,9 +47,9 @@ const filterRooms = (offer, selectedRooms) => {
 
 const filterGuests = (offer, selectedGuests) => {
   if (
-    offer.guests !== undefined
-    && offer.guests !== +selectedGuests
-    && selectedGuests !== 'any'
+    offer.guests !== undefined &&
+    offer.guests !== +selectedGuests &&
+    selectedGuests !== 'any'
   ) {
     throw new Error();
   }
