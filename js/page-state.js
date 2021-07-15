@@ -2,7 +2,7 @@ import { advertForm } from './form/form.js';
 import { mapFilters } from './map/filter.js';
 
 const setDisabled = (...elements) => {
-  elements.forEach((elem) => (elem.disabled = false));
+  elements.forEach((elem) => elem.disabled = false);
 };
 
 const activateMainForm = () => {
