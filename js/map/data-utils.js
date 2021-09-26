@@ -1,8 +1,3 @@
-/**
- * Creates <li> elements of corresponiding features from 'features' array
- * @param {array} features list of strings
- * @returns {DocumentFragment}
- */
 const createFeaturesList = (features) => {
   if (!features) {
     return null;
@@ -23,8 +18,8 @@ const createFeaturesList = (features) => {
 };
 
 /**
- * Generates list of <img> elements with corresponding 'src' value retrived from
- * the imput array 'photosList'
+ * Generates list of <img> elements with corresponding 'src' value retrieved from
+ * the input array 'photosList'
  * @param {array} photos list of strings with images 'src'
  * @param {HTMLElement} img template of <img> element
  * @returns {DocumentFragment}
@@ -45,13 +40,6 @@ const createPhotosList = (photos, img) => {
   return bucket;
 };
 
-/**
- * Сomposes a string from the number of rooms and guests with the correct
- * suffix in Russian
- * @param {integer} rooms rooms' number
- * @param {integer} guests guests' number
- * @returns {string}
- */
 const createRoomAndGuestText = (rooms, guests) => {
   const roomsText = rooms === 1 ? '1 комната' : `${rooms} комнаты`;
   const guestsText = guests === 0 ? 'не для' : `для ${guests}`;
@@ -67,7 +55,7 @@ const createRoomAndGuestText = (rooms, guests) => {
  * @param {string} text value to be set to property
  */
 const updatePropertyOrHide = (element, propertyName, text) => {
-  if (text === null || text === undefined) {
+  if (!text || text.trim() === '') {
     element.classList.add('hidden');
     return;
   }

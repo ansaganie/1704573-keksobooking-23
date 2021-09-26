@@ -21,11 +21,12 @@ const cardTemplate = document
 
 const generateCard = ({ author, offer }) => {
   const newCard = cardTemplate.cloneNode(true);
+  const {guests, checkin, checkout, photos } = offer;
 
   newCard.querySelector('.popup__title').textContent = offer.title;
   newCard.querySelector(
     '.popup__text--price',
-  ).textContent = `${offer.price} <span>₽/ночь</span>`;
+  ).textContent = `${offer.price} ₽/ночь`;
 
   updatePropertyOrHide(
     newCard.querySelector('.popup__text--address'),
@@ -42,13 +43,13 @@ const generateCard = ({ author, offer }) => {
   updatePropertyOrHide(
     newCard.querySelector('.popup__text--capacity'),
     'textContent',
-    createRoomAndGuestText(offer.rooms, offer.guests),
+    createRoomAndGuestText(offer.rooms, guests),
   );
 
   updatePropertyOrHide(
     newCard.querySelector('.popup__text--time'),
     'textContent',
-    `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`,
+    `Заезд после ${checkin}, выезд до ${checkout}`,
   );
 
   appendChildOrHide(
@@ -62,9 +63,9 @@ const generateCard = ({ author, offer }) => {
     offer.description,
   );
 
-  const photos = newCard.querySelector('.popup__photos');
-  const imgTemplate = photos.querySelector('.popup__photo');
-  appendChildOrHide(photos, createPhotosList(offer.photos, imgTemplate));
+  const photosElement = newCard.querySelector('.popup__photos');
+  const imgTemplate = photosElement.querySelector('.popup__photo');
+  appendChildOrHide(photosElement, createPhotosList(photos, imgTemplate));
 
   updatePropertyOrHide(
     newCard.querySelector('.popup__avatar'),

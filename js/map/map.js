@@ -71,8 +71,8 @@ const drawPopups = () => {
 };
 
 const onMainPinDrag = ({ target }) => {
-  const latlng = target.getLatLng();
-  address.value = `${latlng.lat.toFixed(COORDINATE_PRECISION)} ${latlng.lng.toFixed(COORDINATE_PRECISION)}`;
+  const latLng = target.getLatLng();
+  address.value = `${latLng.lat.toFixed(COORDINATE_PRECISION)} ${latLng.lng.toFixed(COORDINATE_PRECISION)}`;
   onAddressChange();
 };
 

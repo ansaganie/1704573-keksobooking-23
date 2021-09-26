@@ -16,7 +16,7 @@ const mapFilters = document.querySelector('.map__filters');
 const type = mapFilters.querySelector('#housing-type');
 const price = mapFilters.querySelector('#housing-price');
 const rooms = mapFilters.querySelector('#housing-rooms');
-const guests = mapFilters.querySelector('#housing-guests');
+const guestsElement = mapFilters.querySelector('#housing-guests');
 const features = Array.from(mapFilters.querySelectorAll('input[name=features]'));
 
 const filterSelectedFeatures = (inputs) => inputs.filter(
@@ -46,9 +46,10 @@ const filterRooms = (offer, selectedRooms) => {
 };
 
 const filterGuests = (offer, selectedGuests) => {
+  const { guests } = offer;
   if (
-    offer.guests !== undefined &&
-    offer.guests !== +selectedGuests &&
+    guests !== undefined &&
+    guests !== +selectedGuests &&
     selectedGuests !== 'any'
   ) {
     throw new Error();
@@ -72,11 +73,11 @@ const doFilter = (data) => {
   const selectedType = type.value;
   const selectedPrice = price.value;
   const selectedRooms = rooms.value;
-  const selectedGuests = guests.value;
+  const selectedGuests = guestsElement.value;
 
   return data
     .filter((advert) => {
-      const offer = advert.offer;
+      const { offer } = advert;
       try {
         filterType(offer, selectedType);
         filterPrice(offer, selectedPrice);
